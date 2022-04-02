@@ -1,11 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, SafeAreaView } from 'react-native';
 import Login from './src/components/TelaLogin/Login'
 
 export default function App() {
   return (
-    <View >
+    <SafeAreaView styles={styles.container}>
       <Login />
-    </View>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
