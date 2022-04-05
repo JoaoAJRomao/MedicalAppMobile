@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView, TextInput, TouchableOpacity, Text, Image } from 'react-native'
+import { Select, NativeBaseProvider } from 'native-base';
 
 export default function CadastroCliente() {
 
@@ -9,10 +10,11 @@ export default function CadastroCliente() {
   const [textConfirmacao, setTextConfirmacao] = useState(null);
   const [textEmail, setTextEmail] = useState(null);
   const [textDataNascimento, setTextDataNascimento] = useState(null);
-  const [textPlano, setTextPlano] = useState(null);
+  const [selectPlano, setSelectPlano] = useState(null);
 
-
-  return (<View style={styles.container}>
+  return (
+  <NativeBaseProvider>
+  <View style={styles.container}>
     <ScrollView
       showsVerticalScrollIndicator={false}
       style={{ marginBottom: 20 }}>
@@ -65,18 +67,19 @@ export default function CadastroCliente() {
         placeholder=" Digite sua Data de Nascimento"
         value={textDataNascimento}
       />
-      <TextInput
-        style={styles.input}
-        onChangeText={setTextPlano}
-        placeholder=" Digite seu Plano"
-        value={textPlano}
-      />
+      
+    <Select onValueChange={itemValue => setSelectPlano(itemValue)} style={{backgroundColor: '#FFFF'}}>
+     <Select.Item label="Hapvida" value="hapvida" />
+     <Select.Item label="Unimed" value="unimed" />
+     <Select.Item label="Bradesco" value="bradesco" />
+     </Select> 
 
       <TouchableOpacity style={styles.buttonCadastro}>
         <Text style={styles.textCadastro}>Criar Conta</Text>
       </TouchableOpacity>
     </ScrollView>
-  </View>);
+  </View>
+  </NativeBaseProvider>);
 }
 
 
