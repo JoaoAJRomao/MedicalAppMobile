@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
+import api from "../../Services/ClienteService"
 import {
   StatusBar,
   TouchableOpacity,
@@ -15,6 +16,11 @@ export default function Login() {
   const [number, onChangeNumber] = React.useState(null);
 
   const navigation = useNavigation()
+
+  async function action() {
+    const cmd = await api.LogarCliente(values)
+    
+  }
 
   return (
     <View style={styles.container}>
