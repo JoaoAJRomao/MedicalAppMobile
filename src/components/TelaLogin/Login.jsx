@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import api from "../../Services/ClienteService"
+import { LogarCliente } from "../../Services/ClienteService"
 import {
   StatusBar,
   TouchableOpacity,
@@ -9,17 +9,23 @@ import {
   Text,
   StyleSheet,
   View,
+  LogBox
 } from "react-native";
 
 export default function Login() {
-  const [text, onChangeText] = React.useState(null);
-  const [number, onChangeNumber] = React.useState(null);
+  const [cpf, onChangeCpf] = React.useState(null);
+  const [pwd, onChangePwd] = React.useState(null);
+
 
   const navigation = useNavigation()
 
-  async function action() {
-    const cmd = await api.LogarCliente(values)
-    
+  async function sendData() {
+    let data = {
+      cpf: cpf,
+      pwd: pwd
+    }
+    const cmd = await LogarCliente(data)
+
   }
 
   return (
@@ -44,19 +50,27 @@ export default function Login() {
 
         <TextInput
           style={styles.input}
-          onChangeText={onChangeText}
+          onChangeText={onChangeCpf}
           placeholder=" Digite seu CPF"
-          value={text}
+          keyboardType="numeric"
+          value={cpf}
         />
         <Text> Senha: </Text>
         <TextInput
           style={styles.input}
-          onChangeText={onChangeNumber}
-          value={number}
+          onChangeText={onChangePwd}
+          value={pwd}
           placeholder=" Digite sua senha"
         />
-        <TouchableOpacity style={styles.buttonLogin}>
-          <Text style={styles.textLogin}>Acessar</Text>
+        <TouchableOpacity
+          style={styles.buttonLogin}
+          onPress={sendData}
+        >
+          <Text
+            style={styles.textLogin}
+          >
+            Acessar
+          </Text>
         </TouchableOpacity>
 
         <Text>Esqueci minha senha</Text>
