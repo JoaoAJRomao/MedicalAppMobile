@@ -25,6 +25,7 @@ export default function Login() {
       pwd: pwd
     }
     const cmd = await LogarCliente(data)
+    console.log(cmd)
 
   }
 
