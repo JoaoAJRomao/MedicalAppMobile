@@ -8,25 +8,26 @@ import {
   TextInput,
   Text,
   StyleSheet,
-  View,
-  LogBox
+  View
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login() {
   const [cpf, onChangeCpf] = React.useState(null);
   const [pwd, onChangePwd] = React.useState(null);
 
-
   const navigation = useNavigation()
 
   async function sendData() {
-    let data = {
+    const data = {
       cpf: cpf,
-      pwd: pwd
+      password: pwd
     }
-    const cmd = await LogarCliente(data)
-    console.log(cmd)
-
+   const res = await LogarCliente(data)
+   await AsyncStorage.setItem("TOKEN", res?.data?.token);
+   await AsyncStorage.setItem("ID", res?.data?.data?.idCliente)
+   await AsyncStorage.setItem("NOME_CLIENTE", res?.data?.data?.nome)
+   await AsyncStorage.setItem("CONVENIO", res?.data?.data?.convenio)
   }
 
   return (
@@ -61,6 +62,7 @@ export default function Login() {
           style={styles.input}
           onChangeText={onChangePwd}
           value={pwd}
+          secureTextEntry={true}
           placeholder=" Digite sua senha"
         />
         <TouchableOpacity

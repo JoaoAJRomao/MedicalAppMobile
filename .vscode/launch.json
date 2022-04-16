@@ -5,11 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Attach to Hermes application - Experimental",
-            "request": "attach",
-            "type": "reactnativedirect",
+            "name": "Attach to packager",
             "cwd": "${workspaceFolder}",
-            "port": 19001
-        },
+            "type": "reactnative",
+            "request": "attach"
+        }
     ]
 }
