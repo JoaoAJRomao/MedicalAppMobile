@@ -51,7 +51,7 @@ export default function CadastroCliente() {
         onChangeText={setTextSenha}
         placeholder=" Digite sua senha"
         secureTextEntry={true}
-        maxLength="20"
+        maxLength={20}
         value={textSenha}
       />
       <TextInput
@@ -59,7 +59,7 @@ export default function CadastroCliente() {
         onChangeText={setTextConfirmacao}
         placeholder=" Confirme sua senha"
         secureTextEntry={true}
-        maxLength="20"
+        maxLength={20}
         value={textConfirmacao}
       />
       <TextInput
