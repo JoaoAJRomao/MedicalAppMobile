@@ -4,7 +4,7 @@ import api from "./api"
 export async function CriarCliente(params) {
     const estrutura = []
   
-    await api.post(`${api}/cliente/createClient`, params)
+    await api.post(`/cliente/createClient`, params)
       .then((res) => {
         estrutura.push(res.data.data)
       }).catch((err) => {

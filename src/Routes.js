@@ -1,5 +1,5 @@
 import React from 'react'
-import CadastroCliente from './components/TelaLogin/CadastroCliente';
+import CadastroCliente from './components/TelaCadastroCliente/CadastroCliente';
 import Login from './components/TelaLogin/Login';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
