@@ -8,9 +8,10 @@ import {
   TextInput,
   Text,
   StyleSheet,
-  View
+  View,
+  Alert
 } from "react-native";
-import { MaskedTextInput} from "react-native-mask-text";
+import { MaskedTextInput } from "react-native-mask-text";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login() {
@@ -24,11 +25,18 @@ export default function Login() {
       cpf: cpf,
       password: pwd
     }
-   const res = await LogarCliente(data)
-  await AsyncStorage.setItem("TOKEN", res[0]?.token);
-  await AsyncStorage.setItem("ID", res[0]?.data?.idCliente.ToString())
-  await AsyncStorage.setItem("NOME_CLIENTE", res[0]?.data?.nome)
-  await AsyncStorage.setItem("CONVENIO", res[0]?.data?.convenio)
+    const res = await LogarCliente(data)
+    if (res[0].data.success) {
+      await AsyncStorage.setItem("TOKEN", res[0]?.token);
+      await AsyncStorage.setItem("ID", res[0]?.data?.idCliente.toString())
+      await AsyncStorage.setItem("NOME_CLIENTE", res[0]?.data?.nome)
+      await AsyncStorage.setItem("CONVENIO", res[0]?.data?.convenio)
+      navigation.navigate('consulta')
+    } else {
+      Alert.alert(
+        res[0].data?.message
+      )
+    }
   }
 
   return (
@@ -51,14 +59,14 @@ export default function Login() {
 
         <Text> Login: </Text>
         <View>
-        <MaskedTextInput
-          style={styles.input}
-          onChangeText={onChangeCpf}
-          placeholder=" Digite seu CPF"
-          keyboardType="numeric"
-          value={cpf}
-          mask="999.999.999-99"
-        />
+          <MaskedTextInput
+            style={styles.input}
+            onChangeText={onChangeCpf}
+            placeholder=" Digite seu CPF"
+            keyboardType="numeric"
+            value={cpf}
+            mask="999.999.999-99"
+          />
         </View>
         <Text> Senha: </Text>
         <TextInput
@@ -67,17 +75,10 @@ export default function Login() {
           value={pwd}
           secureTextEntry={true}
           placeholder=" Digite sua senha"
-          maxLength="20"
+          maxLength={20}
         />
-        <TouchableOpacity
-          style={styles.buttonLogin}
-          onPress={sendData}
-        >
-          <Text
-            style={styles.textLogin}
-          >
-            Acessar
-          </Text>
+        <TouchableOpacity style={styles.buttonLogin} onPress={sendData}>
+          <Text style={styles.textLogin}> Acessar </Text>
         </TouchableOpacity>
 
         <Text>Esqueci minha senha</Text>

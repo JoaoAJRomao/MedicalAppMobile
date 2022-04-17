@@ -21,8 +21,8 @@ export async function LogarCliente(params) {
       .then((res) => {
         estrutura.push(res?.data)
       }).catch((err) => {
-        estrutura.push(err.data.data)
+        estrutura.push(err?.response)
       });
-      
+
     return estrutura
 }
