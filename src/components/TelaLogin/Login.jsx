@@ -10,6 +10,7 @@ import {
   StyleSheet,
   View
 } from "react-native";
+import { MaskedTextInput} from "react-native-mask-text";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login() {
@@ -24,10 +25,10 @@ export default function Login() {
       password: pwd
     }
    const res = await LogarCliente(data)
-   await AsyncStorage.setItem("TOKEN", res?.data?.token);
-   await AsyncStorage.setItem("ID", res?.data?.data?.idCliente)
-   await AsyncStorage.setItem("NOME_CLIENTE", res?.data?.data?.nome)
-   await AsyncStorage.setItem("CONVENIO", res?.data?.data?.convenio)
+  await AsyncStorage.setItem("TOKEN", res[0]?.token);
+  await AsyncStorage.setItem("ID", res[0]?.data?.idCliente.ToString())
+  await AsyncStorage.setItem("NOME_CLIENTE", res[0]?.data?.nome)
+  await AsyncStorage.setItem("CONVENIO", res[0]?.data?.convenio)
   }
 
   return (
@@ -49,14 +50,16 @@ export default function Login() {
         </View>
 
         <Text> Login: </Text>
-
-        <TextInput
+        <View>
+        <MaskedTextInput
           style={styles.input}
           onChangeText={onChangeCpf}
           placeholder=" Digite seu CPF"
           keyboardType="numeric"
           value={cpf}
+          mask="999.999.999-99"
         />
+        </View>
         <Text> Senha: </Text>
         <TextInput
           style={styles.input}
@@ -64,6 +67,7 @@ export default function Login() {
           value={pwd}
           secureTextEntry={true}
           placeholder=" Digite sua senha"
+          maxLength="20"
         />
         <TouchableOpacity
           style={styles.buttonLogin}
