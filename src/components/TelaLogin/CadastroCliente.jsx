@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView, TextInput, TouchableOpacity, Text, Image } from 'react-native'
 import { Select, NativeBaseProvider } from 'native-base';
+import { MaskedTextInput } from 'react-native-mask-text';
 
 export default function CadastroCliente() {
 
@@ -31,10 +32,11 @@ export default function CadastroCliente() {
           source={require("@expo/../../assets/MedicalAppIcon2.png")}
         />
       </View>
-      <TextInput
+      <MaskedTextInput
         style={styles.input}
         onChangeText={setTextCpf}
         placeholder=" Digite seu CPF"
+        mask="999.999.999-99"
         value={textCpf}
       />
       <TextInput
@@ -42,23 +44,29 @@ export default function CadastroCliente() {
         onChangeText={setTextNome}
         placeholder=" Digite seu Nome Completo"
         value={textNome}
+        keyboardType="ascii-capable"
       />
       <TextInput
         style={styles.input}
         onChangeText={setTextSenha}
         placeholder=" Digite sua senha"
+        secureTextEntry={true}
+        maxLength="20"
         value={textSenha}
       />
       <TextInput
         style={styles.input}
         onChangeText={setTextConfirmacao}
         placeholder=" Confirme sua senha"
+        secureTextEntry={true}
+        maxLength="20"
         value={textConfirmacao}
       />
       <TextInput
         style={styles.input}
         onChangeText={setTextEmail}
         placeholder=" Digite seu e-mail"
+        keyboardType="email-address"
         value={textEmail}
       />
       <TextInput
@@ -67,6 +75,7 @@ export default function CadastroCliente() {
         placeholder=" Digite sua Data de Nascimento"
         value={textDataNascimento}
       />
+      
       
     <Select onValueChange={itemValue => setSelectPlano(itemValue)} style={{backgroundColor: '#FFFF'}}>
      <Select.Item label="Hapvida" value="hapvida" />

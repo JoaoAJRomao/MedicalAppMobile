@@ -19,7 +19,7 @@ export async function LogarCliente(params) {
   
     await api.post(`/cliente/login`, params)
       .then((res) => {
-        estrutura.push(res.data.data)
+        estrutura.push(res?.data)
       }).catch((err) => {
         estrutura.push(err.data.data)
       });
