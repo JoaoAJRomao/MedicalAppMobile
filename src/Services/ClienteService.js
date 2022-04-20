@@ -26,3 +26,16 @@ export async function LogarCliente(params) {
 
     return estrutura
 }
+
+export async function RecuperarSenha(params) {
+    const estrutura = []
+  
+    await api.post(`/cliente/RecoverEmail?email=${params}`)
+      .then((res) => {
+        estrutura.push(res?.data)
+      }).catch((err) => {
+        estrutura.push(err?.response)
+      });
+
+    return estrutura
+}

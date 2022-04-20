@@ -1,22 +1,27 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { LogarCliente } from "../../Services/ClienteService"
+import { LogarCliente, RecuperarSenha } from "../../Services/ClienteService"
 import {
   StatusBar,
   TouchableOpacity,
   Image,
   TextInput,
   Text,
-  StyleSheet,
   View,
-  Alert
+  Alert,
+  Modal,
+  Pressable,
 } from "react-native";
 import { MaskedTextInput } from "react-native-mask-text";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './Login.style'
+import modalStyle from './Modal.style'
 
 export default function Login() {
   const [cpf, onChangeCpf] = React.useState(null);
   const [pwd, onChangePwd] = React.useState(null);
+  const [email, onChangeEmail] = React.useState("");
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   const navigation = useNavigation()
 
@@ -37,6 +42,14 @@ export default function Login() {
         res[0].data?.message
       )
     }
+  }
+
+  async function recoveryPassword() {
+    const res = await RecuperarSenha(email)
+    if (res[0].data.success) {
+      Alert.alert(res[0].data?.message)
+    } else { Alert.alert(res[0].data?.message) }
+    setModalVisible(!modalVisible)
   }
 
   return (
@@ -81,7 +94,37 @@ export default function Login() {
           <Text style={styles.textLogin}> Acessar </Text>
         </TouchableOpacity>
 
-        <Text>Esqueci minha senha</Text>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={modalStyle.centeredView}>
+            <View style={modalStyle.modalView}>
+              <Text style={modalStyle.modalText}>Recuperar senha</Text>
+              <View>
+                <MaskedTextInput
+                  style={styles.input}
+                  onChangeText={onChangeEmail}
+                  placeholder=" Digite seu Email"
+                  value={email}
+                />
+              </View>
+              <TouchableOpacity onPress={recoveryPassword}>
+                <Text style={modalStyle.modalRecoverPwd}> Confirmar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
+        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+          <Text >Esqueci minha senha</Text>
+        </TouchableOpacity>
+
+
         <TouchableOpacity style={styles.buttonCadastro} onPress={() => navigation.navigate('cadastro')}>
           <Text style={styles.textCadastro}>Novo Cadastro</Text>
         </TouchableOpacity>
@@ -89,57 +132,3 @@ export default function Login() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    height: 48,
-    width: 296,
-    marginTop: 10,
-    marginBottom: 10,
-    borderRadius: 12,
-    padding: 10,
-    backgroundColor: "#ffff",
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#C9D5D9",
-  },
-  tinyLogo: {
-    width: 155,
-    height: 155,
-  },
-  logo: {
-    width: 66,
-    height: 58,
-  },
-  buttonLogin: {
-    height: 48,
-    width: 296,
-    marginTop: 10,
-    backgroundColor: "#38B6FF",
-    borderRadius: 6,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonCadastro: {
-    height: 48,
-    width: 296,
-    marginTop: 10,
-    backgroundColor: "#777777",
-    borderRadius: 6,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  textLogin: {
-    color: "#ffffff",
-    fontSize: 16,
-    fontWeight: "bold"
-  },
-  textCadastro: {
-    color: "#ffffff",
-    fontSize: 16,
-    fontWeight: "bold"
-  },
-});
