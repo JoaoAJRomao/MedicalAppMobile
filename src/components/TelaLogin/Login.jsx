@@ -10,7 +10,6 @@ import {
   View,
   Alert,
   Modal,
-  Pressable,
 } from "react-native";
 import { MaskedTextInput } from "react-native-mask-text";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -31,7 +30,7 @@ export default function Login() {
       password: pwd
     }
     const res = await LogarCliente(data)
-    if (res[0].data.success) {
+    if (res[0].success) {
       await AsyncStorage.setItem("TOKEN", res[0]?.token);
       await AsyncStorage.setItem("ID", res[0]?.data?.idCliente.toString())
       await AsyncStorage.setItem("NOME_CLIENTE", res[0]?.data?.nome)
