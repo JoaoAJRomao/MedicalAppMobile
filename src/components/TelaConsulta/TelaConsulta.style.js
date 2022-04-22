@@ -63,21 +63,5 @@ export default StyleSheet.create({
         height: '80%',
         width: 1,
         backgroundColor: '#909090',
-    },
-    buttonStyle: {
-        backgroundColor: '#fc454e',
-        width: 66,
-        height: 66,
-        borderRadius: 33,
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: 20,
-        right: 20
-    },
-    buttonTextStyle: {
-        color: 'white',
-        fontSize: 45,
-        marginBottom: 6
     }
 })

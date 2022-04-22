@@ -8,9 +8,10 @@ import {
     Alert,
     ScrollView
 } from 'react-native'
+import Consulta from '../Consulta/Consulta'
 import styles from './TelaConsulta.style'
 
-export default function Consulta() {
+export default function TelaConsulta() {
 
     function something() {
         Alert.alert("Pass")
@@ -38,8 +39,11 @@ export default function Consulta() {
             </View>
             <View style={styles.scrollview}>
                 <ScrollView >
-                    <View style={styles.box}></View>
-                    <View style={styles.box}></View>
+                    <Consulta />
+                    <View style={styles.box}>
+                        <Text> 22/04/2022 as 17:00 </Text>
+                        <Text> Ortopedia </Text>
+                    </View>
                     <View style={styles.box}></View>
                     <View style={styles.box}></View>
                 </ScrollView>
@@ -50,11 +54,11 @@ export default function Consulta() {
                 </TouchableOpacity>
             </View>
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.footerButton}>
+                <TouchableOpacity onPress={something} style={styles.footerButton}>
                     <Text> Curiosidade </Text>
                 </TouchableOpacity>
                 <View style={styles.verticleLine}></View>
-                <TouchableOpacity style={styles.footerButton}>
+                <TouchableOpacity onPress={something} style={styles.footerButton}>
                     <Text> Historico </Text>
                 </TouchableOpacity>
             </View>
