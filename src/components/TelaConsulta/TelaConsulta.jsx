@@ -36,16 +36,24 @@ export default function Consulta() {
                     />
                 </TouchableOpacity>
             </View>
-            <ScrollView style={styles.scrollView}>
-                <View style={styles.box}></View>
-                <View style={styles.box}></View>
-                <View style={styles.box}></View>
-                <View style={styles.box}></View>
-            </ScrollView>
-            <View style={styles.footer}>                
+            <View style={styles.scrollview}>
+                <ScrollView >
+                    <View style={styles.box}></View>
+                    <View style={styles.box}></View>
+                    <View style={styles.box}></View>
+                    <View style={styles.box}></View>
+                </ScrollView>
+                <TouchableOpacity onPress={something} style={styles.scrollviewTouchable}>
+                    <Image source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2017/11/Floating_Button.png' }}
+                        style={styles.scrollviewImage}
+                    />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.footer}>
                 <TouchableOpacity style={styles.footerButton}>
                     <Text> Curiosidade </Text>
                 </TouchableOpacity>
+                <View style={styles.verticleLine}></View>
                 <TouchableOpacity style={styles.footerButton}>
                     <Text> Historico </Text>
                 </TouchableOpacity>
