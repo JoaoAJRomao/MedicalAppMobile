@@ -10,6 +10,36 @@ export default StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         borderBottomWidth: 2,
-        borderBottomColor: 'yellow'
+        borderBottomColor: 'yellow',
+        marginTop: 5,
+        marginLeft: 5,
+        marginRight: 5
     },
+    box: {
+        height: 300,
+        backgroundColor: '#DDD',
+        margin: 7,
+        borderRadius: 5
+    },
+    scrollview: {
+    },
+    footer: {
+        height: 100,
+        backgroundColor: 'white',
+        marginLeft: 5,
+        marginRight: 5,
+        marginBottom: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        borderRadius: 5
+    },
+    footerButton: {
+        backgroundColor: 'red',
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingRight: 10,
+        paddingLeft: 10,
+        borderRadius: 5
+    }
 })
