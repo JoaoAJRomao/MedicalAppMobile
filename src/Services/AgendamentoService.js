@@ -1,9 +1,9 @@
-import axios from "axios";
+import api from "./api"
 
 export async function BuscarDoutorPorEspecialidade(params) {
     const estrutura = []
   
-    await axios.get(`${api}/consulta/GetDoctorsBySpeciality?speciality=${params}`)
+    await api.get(`/consulta/GetDoctorsBySpeciality?speciality=${params}`)
       .then((res) => {
         estrutura.push(res.data.data)
       }).catch((err) => {
@@ -16,7 +16,7 @@ export async function BuscarDoutorPorEspecialidade(params) {
 export async function BuscarDoutorPorCrm(params) {
     const estrutura = []
   
-    await axios.get(`${api}/consulta/GetDoctorsByCrm?crm=${params}`)
+    await api.get(`/consulta/GetDoctorsByCrm?crm=${params}`)
       .then((res) => {
         estrutura.push(res.data.data)
       }).catch((err) => {
@@ -29,7 +29,7 @@ export async function BuscarDoutorPorCrm(params) {
 export async function BuscarFilaPorMedicoeDataConsulta(params) {
     const estrutura = []
   
-    await axios.get(`${api}/consulta/GetQuerysByCrmDate?crm=${params.medicoAtual}&DataConsulta=${params.DataConsulta}`)
+    await axios.get(`/consulta/GetQuerysByCrmDate?crm=${params?.medicoAtual}&DataConsulta=${params?.DataConsulta}`)
       .then((res) => {
         estrutura.push(res.data.data)
       }).catch((err) => {
@@ -39,10 +39,10 @@ export async function BuscarFilaPorMedicoeDataConsulta(params) {
     return estrutura
 }
 
-export async function BuscarFilaPorMedicoeDataConsulta(params) {
+export async function BuscarTodasEspecialidades() {
     const estrutura = []
   
-    await axios.get(`${api}/consulta/GetEspecialityAll`)
+    await api.get(`/consulta/GetEspecialityAll`)
       .then((res) => {
         estrutura.push(res.data.data)
       }).catch((err) => {
@@ -55,7 +55,7 @@ export async function BuscarFilaPorMedicoeDataConsulta(params) {
 export async function CriarNovaConsulta(params) {
     const estrutura = []
   
-    await axios.post(`${api}/consulta/CreateNewQuery`, params)
+    await api.post(`/consulta/CreateNewQuery`, params)
       .then((res) => {
         estrutura.push(res.data.data)
       }).catch((err) => {
@@ -68,7 +68,7 @@ export async function CriarNovaConsulta(params) {
 export async function DeletarConsultaPorId(params) {
     const estrutura = []
   
-    await axios.delete(`${api}/Consulta/deleteQueryById?IdClient=${params.key}`, )
+    await api.delete(`/Consulta/deleteQueryById?IdClient=${params.key}`, )
       .then((res) => {
         estrutura.push(res.data.data)
       }).catch((err) => {
@@ -78,10 +78,12 @@ export async function DeletarConsultaPorId(params) {
     return estrutura
 }
 
-export async function ConsultaConsultaPorId(params) {
+export async function ConsultaPorId(params) {
     const estrutura = []
   
-    await axios.delete(`${api}/Consulta/QueryByCustomer?IdClient=${params.idClient}`, )
+    await api.get(`/Consulta/QueryByCustomer?IdClient=${params.idClient}`, {headers: {
+      Authorization: `Bearer ${params.token}`
+      }})
       .then((res) => {
         estrutura.push(res.data.data)
       }).catch((err) => {
