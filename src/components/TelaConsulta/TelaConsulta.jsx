@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Image,
@@ -6,47 +6,52 @@ import {
     StatusBar,
     TouchableOpacity,
     Alert,
-    ScrollView
+    FlatList
 } from 'react-native'
 import Consulta from '../Consulta/Consulta'
 import styles from './TelaConsulta.style'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ConsultaPorId } from '../../Services/AgendamentoService';
-import { FlatList } from 'native-base';
 
 export default function TelaConsulta() {
 
-    const [nomeCliente, setNomeCliente] = useState("") 
-    const [Id, setId] = useState("") 
-    const [token, setToken] = useState("") 
-    const [estruturaConsultas,setEstruturaConsultas] = useState([])
+    const [nomeCliente, setNomeCliente] = useState("")
+    const [Id, setId] = useState("")
+    const [token, setToken] = useState("")
+    const [estruturaConsultas, setEstruturaConsultas] = useState([])
 
     useEffect(async () => {
-       const cliente = await AsyncStorage.getItem("NOME_CLIENTE")
-       const IdCliente = await AsyncStorage.getItem("ID")
-       const tokenclient = await AsyncStorage.getItem("TOKEN")
-       setNomeCliente(cliente)
-       setId(IdCliente)
-       setToken(tokenclient)
-
-        await carregarLista(IdCliente,tokenclient)
-
-
-    },[])
+        const cliente = await AsyncStorage.getItem("NOME_CLIENTE")
+        const IdCliente = await AsyncStorage.getItem("ID")
+        const tokenclient = await AsyncStorage.getItem("TOKEN")
+        setNomeCliente(cliente)
+        setId(IdCliente)
+        setToken(tokenclient)
+        await carregarLista(IdCliente, tokenclient)
+    }, [])
 
     function something() {
         Alert.alert("Pass")
     }
 
-    async function carregarLista(IdCliente,tokenclient) {
+    async function carregarLista(IdCliente, tokenclient) {
         const params = {
             idClient: IdCliente,
             token: tokenclient
-        } 
-      const res = await ConsultaPorId(params)
-      setEstruturaConsultas(res[0])
+        }
+        const res = await ConsultaPorId(params)
+        setEstruturaConsultas(res[0])
     }
 
+    const [people, setPeople] = useState([
+        { name: 'John', id: '1' },
+        { name: 'yoshi', id: '2' },
+        { name: 'mario', id: '3' },
+        { name: 'luigi', id: '4' },
+        { name: 'peach', id: '5' },
+        { name: 'toad', id: '6' },
+        { name: 'bowser', id: '7' },
+    ])
     return (
         <>
             <StatusBar style="light" backgroundColor="#000" translucent={false} />
@@ -68,17 +73,13 @@ export default function TelaConsulta() {
                 </TouchableOpacity>
             </View>
             <View style={styles.scrollview}>
-               
-                    <FlatList
-                    data={estruturaConsultas}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={(item)=>{
-                        <View>
-                        <Text> {item?.nomeEspecialidade} </Text>
-                        <Text> {item?.dataConsulta} </Text>    
-                        </View>          
-                    }}
-                    />
+                <FlatList
+                keyExtractor={(item)=> item.id}
+                    data={people}
+                    renderItem={({ item }) => (
+                        <Text style={styles.item}>{item.name}</Text>
+                    )}
+                />
 
                 <TouchableOpacity onPress={something} style={styles.scrollviewTouchable}>
                     <Image source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2017/11/Floating_Button.png' }}

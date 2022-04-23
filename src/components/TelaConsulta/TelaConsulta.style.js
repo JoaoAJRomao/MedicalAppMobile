@@ -21,6 +21,14 @@ export default StyleSheet.create({
         margin: 7,
         borderRadius: 5
     },
+    item:{
+        marginTop: 24,
+        padding: 30,
+        backgroundColor: 'pink',
+        fontSize: 24,
+        marginHorizontal: 10,
+        marginTop: 24
+    },
     scrollview: {
         justifyContent: 'center',
         flex: 1,
