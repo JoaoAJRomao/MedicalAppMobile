@@ -13,21 +13,31 @@ export default StyleSheet.create({
         borderBottomColor: 'yellow',
         marginTop: 5,
         marginLeft: 5,
-        marginRight: 5
-    },
-    box: {
-        height: 300,
-        backgroundColor: '#DDD',
-        margin: 7,
+        marginRight: 5,
         borderRadius: 5
     },
-    item:{
-        marginTop: 24,
-        padding: 30,
-        backgroundColor: 'pink',
-        fontSize: 24,
-        marginHorizontal: 10,
-        marginTop: 24
+    box: {
+        height: 100,
+        backgroundColor: '#DDD',
+        margin: 7,
+        borderRadius: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+    },
+    groupItem: {        
+        width: '70%',
+        marginStart: 10,
+    },
+    item: {
+        fontSize: 18,
+    },
+    colorItem: {
+        height: '80%',
+        width: '20%',
+        backgroundColor: 'red',
+        marginLeft: 10,
+        borderRadius: 10
     },
     scrollview: {
         justifyContent: 'center',

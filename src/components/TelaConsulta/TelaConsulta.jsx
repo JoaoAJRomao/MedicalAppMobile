@@ -8,50 +8,88 @@ import {
     Alert,
     FlatList
 } from 'react-native'
-import Consulta from '../Consulta/Consulta'
+
 import styles from './TelaConsulta.style'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ConsultaPorId } from '../../Services/AgendamentoService';
 
 export default function TelaConsulta() {
 
-    const [nomeCliente, setNomeCliente] = useState("")
-    const [Id, setId] = useState("")
+    const [nome, setNome] = useState("")
+    const [id, setId] = useState("")
     const [token, setToken] = useState("")
-    const [estruturaConsultas, setEstruturaConsultas] = useState([])
+    const [consulta, setConsulta] = useState([])
 
     useEffect(async () => {
         const cliente = await AsyncStorage.getItem("NOME_CLIENTE")
-        const IdCliente = await AsyncStorage.getItem("ID")
+        const idCliente = await AsyncStorage.getItem("ID")
         const tokenclient = await AsyncStorage.getItem("TOKEN")
-        setNomeCliente(cliente)
-        setId(IdCliente)
+        setNome(cliente)
+        setId(idCliente)
         setToken(tokenclient)
-        await carregarLista(IdCliente, tokenclient)
+        await carregarLista()
     }, [])
 
     function something() {
         Alert.alert("Pass")
     }
 
-    async function carregarLista(IdCliente, tokenclient) {
+    async function carregarLista() {
         const params = {
-            idClient: IdCliente,
-            token: tokenclient
+            idClient: id,
+            token: token
         }
         const res = await ConsultaPorId(params)
-        setEstruturaConsultas(res[0])
+        setConsulta(res)
     }
 
-    const [people, setPeople] = useState([
-        { name: 'John', id: '1' },
-        { name: 'yoshi', id: '2' },
-        { name: 'mario', id: '3' },
-        { name: 'luigi', id: '4' },
-        { name: 'peach', id: '5' },
-        { name: 'toad', id: '6' },
-        { name: 'bowser', id: '7' },
+    const [mockConsulta, setMockConsulta] = useState([
+        {
+            "codigoConsulta": 125,
+            "dataConsulta": "12/02/2022",
+            "horaConsulta": "10:40",
+            "idCliente": 45,
+            "convenioCliente": "unimed",
+            "crmMedico": 12345,
+            "codigoEspecialidade": 5,
+            "nomeMedico": "Dr. Dolittle",
+            "nomeEspecialidade": "Nutrição"
+        },
+        {
+            "codigoConsulta": 75,
+            "dataConsulta": "20/11/2021",
+            "horaConsulta": "06:00",
+            "idCliente": 45,
+            "convenioCliente": "unimed",
+            "crmMedico": 23456,
+            "codigoEspecialidade": 15,
+            "nomeMedico": "Dr. Marcos",
+            "nomeEspecialidade": "Ecocardiografia"
+        },
+        {
+            "codigoConsulta": 105,
+            "dataConsulta": "30/11/2021",
+            "horaConsulta": "11:20",
+            "idCliente": 45,
+            "convenioCliente": "unimed",
+            "crmMedico": 34567,
+            "codigoEspecialidade": 25,
+            "nomeMedico": "Dr. Lucas",
+            "nomeEspecialidade": "Hepatologia"
+        },
+        {
+            "codigoConsulta": 213,
+            "dataConsulta": "23/04/2022",
+            "horaConsulta": "11:20",
+            "idCliente": 45,
+            "convenioCliente": "unimed",
+            "crmMedico": 34568,
+            "codigoEspecialidade": 28,
+            "nomeMedico": "Dra. Angela",
+            "nomeEspecialidade": "Cardiaco"
+        }
     ])
+
     return (
         <>
             <StatusBar style="light" backgroundColor="#000" translucent={false} />
@@ -62,7 +100,7 @@ export default function TelaConsulta() {
                     resizeMode="contain"
                 />
                 <Text style={{ color: 'white' }}>
-                    Bem vindo {nomeCliente}
+                    Bem vindo {nome}
                 </Text>
                 <TouchableOpacity onPress={something}>
                     <Image
@@ -74,14 +112,19 @@ export default function TelaConsulta() {
             </View>
             <View style={styles.scrollview}>
                 <FlatList
-                keyExtractor={(item)=> item.id}
-                    data={people}
+                    keyExtractor={(item) => item.codigoConsulta}
+                    data={mockConsulta}
                     renderItem={({ item }) => (
-                        <Text style={styles.item}>{item.name}</Text>
+                        <View style={styles.box}>
+                            <View style={styles.colorItem}></View>
+                            <View style={styles.groupItem}>
+                                <Text style={styles.item}>{item.dataConsulta} as {item.horaConsulta}</Text>
+                                <Text style={styles.item}>{item.nomeEspecialidade} com {item.nomeMedico}</Text>
+                            </View>
+                        </View>
                     )}
                 />
-
-                <TouchableOpacity onPress={something} style={styles.scrollviewTouchable}>
+                <TouchableOpacity onPress={carregarLista} style={styles.scrollviewTouchable}>
                     <Image source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2017/11/Floating_Button.png' }}
                         style={styles.scrollviewImage}
                     />
