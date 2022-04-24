@@ -27,20 +27,20 @@ export default function TelaConsulta() {
         setNome(cliente)
         setId(idCliente)
         setToken(tokenclient)
-        await carregarLista()
+        await carregarLista(idCliente, tokenclient)
     }, [])
 
     function something() {
         Alert.alert("Pass")
     }
 
-    async function carregarLista() {
+    async function carregarLista(idCliente, tokenclient) {
         const params = {
-            idClient: id,
-            token: token
+            idClient: idCliente,
+            token: tokenclient
         }
         const res = await ConsultaPorId(params)
-        setConsulta(res)
+        setMockConsulta(res[0])
     }
 
     const [mockConsulta, setMockConsulta] = useState([
