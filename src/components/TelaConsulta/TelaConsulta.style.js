@@ -35,7 +35,7 @@ export default StyleSheet.create({
     colorItem: {
         height: '80%',
         width: '20%',
-        backgroundColor: 'red',
+        backgroundColor: 'blue',
         marginLeft: 10,
         borderRadius: 10
     },

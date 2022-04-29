@@ -40,55 +40,8 @@ export default function TelaConsulta() {
             token: tokenclient
         }
         const res = await ConsultaPorId(params)
-        setMockConsulta(res[0])
+        setConsulta(res[0])
     }
-
-    const [mockConsulta, setMockConsulta] = useState([
-        {
-            "codigoConsulta": 125,
-            "dataConsulta": "12/02/2022",
-            "horaConsulta": "10:40",
-            "idCliente": 45,
-            "convenioCliente": "unimed",
-            "crmMedico": 12345,
-            "codigoEspecialidade": 5,
-            "nomeMedico": "Dr. Dolittle",
-            "nomeEspecialidade": "Nutrição"
-        },
-        {
-            "codigoConsulta": 75,
-            "dataConsulta": "20/11/2021",
-            "horaConsulta": "06:00",
-            "idCliente": 45,
-            "convenioCliente": "unimed",
-            "crmMedico": 23456,
-            "codigoEspecialidade": 15,
-            "nomeMedico": "Dr. Marcos",
-            "nomeEspecialidade": "Ecocardiografia"
-        },
-        {
-            "codigoConsulta": 105,
-            "dataConsulta": "30/11/2021",
-            "horaConsulta": "11:20",
-            "idCliente": 45,
-            "convenioCliente": "unimed",
-            "crmMedico": 34567,
-            "codigoEspecialidade": 25,
-            "nomeMedico": "Dr. Lucas",
-            "nomeEspecialidade": "Hepatologia"
-        },
-        {
-            "codigoConsulta": 213,
-            "dataConsulta": "23/04/2022",
-            "horaConsulta": "11:20",
-            "idCliente": 45,
-            "convenioCliente": "unimed",
-            "crmMedico": 34568,
-            "codigoEspecialidade": 28,
-            "nomeMedico": "Dra. Angela",
-            "nomeEspecialidade": "Cardiaco"
-        }
-    ])
 
     return (
         <>
@@ -113,7 +66,7 @@ export default function TelaConsulta() {
             <View style={styles.scrollview}>
                 <FlatList
                     keyExtractor={(item) => item.codigoConsulta}
-                    data={mockConsulta}
+                    data={consulta}
                     renderItem={({ item }) => (
                         <View style={styles.box}>
                             <View style={styles.colorItem}></View>
