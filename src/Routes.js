@@ -4,6 +4,7 @@ import Consulta from './components/TelaConsulta/TelaConsulta';
 import Login from './components/TelaLogin/Login';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import TelaPesquisaConsulta from './components/TelaPesquisaConsulta/TelaPesquisaConsulta';
 
 
 export default function Routes() {
@@ -14,6 +15,7 @@ export default function Routes() {
         screenOptions={{
           headerShown: false
         }}>
+        <Stack.Screen name="exibirconsulta" component={TelaPesquisaConsulta} />
         <Stack.Screen name="login" component={Login} />
         <Stack.Screen name="cadastro" component={CadastroCliente} />
         <Stack.Screen name="consulta" component={Consulta} />

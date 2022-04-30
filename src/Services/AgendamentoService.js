@@ -1,4 +1,6 @@
 import api from "./api"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export async function BuscarDoutorPorEspecialidade(params) {
     const estrutura = []
@@ -42,7 +44,10 @@ export async function BuscarFilaPorMedicoeDataConsulta(params) {
 export async function BuscarTodasEspecialidades() {
     const estrutura = []
   
-    await api.get(`/consulta/GetEspecialityAll`)
+    const tokenclient = await AsyncStorage.getItem("TOKEN")
+    await api.get(`/consulta/GetEspecialityAll`, {headers: {
+      Authorization: `Bearer ${tokenclient}`
+      }})
       .then((res) => {
         estrutura.push(res.data.data)
       }).catch((err) => {
