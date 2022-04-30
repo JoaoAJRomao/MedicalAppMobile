@@ -15,10 +15,10 @@ export default function Routes() {
         screenOptions={{
           headerShown: false
         }}>
-        <Stack.Screen name="exibirconsulta" component={TelaPesquisaConsulta} />
         <Stack.Screen name="login" component={Login} />
-        <Stack.Screen name="cadastro" component={CadastroCliente} />
         <Stack.Screen name="consulta" component={Consulta} />
+        <Stack.Screen name="exibirconsulta" component={TelaPesquisaConsulta} />
+        <Stack.Screen name="cadastro" component={CadastroCliente} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -8,13 +8,13 @@ import {
     Alert,
     FlatList
 } from 'react-native'
-
+import { useNavigation } from "@react-navigation/native";
 import styles from './TelaConsulta.style'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ConsultaPorId } from '../../Services/AgendamentoService';
 
 export default function TelaConsulta() {
-
+    const navigation = useNavigation()
     const [nome, setNome] = useState("")
     const [id, setId] = useState("")
     const [token, setToken] = useState("")
@@ -31,7 +31,7 @@ export default function TelaConsulta() {
     }, [])
 
     function something() {
-        Alert.alert("Pass")
+        navigation.navigate('exibirconsulta')
     }
 
     async function carregarLista(idCliente, tokenclient) {
@@ -84,8 +84,8 @@ export default function TelaConsulta() {
                                     <Text style={styles.itemText}>{item.dataConsulta}</Text>
                                     <Text style={styles.itemText}>{item.horaConsulta}</Text>
                                 </View>
-                                <View >
-                                    <Text style={styles.itemText}>{item.nomeMedico}</Text>                                    
+                                <View style={{alignItems: 'center'}}>
+                                    <Text>{item.nomeMedico}</Text>                                    
                                 </View>
                                 <View style={styles.item}>
                                     <Text style={styles.itemText}>Consulta</Text>
