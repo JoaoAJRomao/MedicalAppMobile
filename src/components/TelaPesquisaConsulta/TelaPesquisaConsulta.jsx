@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
-import styles from "./Consulta.style";
+import styles from "./TelaPesquisaConsulta.style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import Carrousel from "./Carrousel";
+import Carrousel from "../Carrousel/Carrousel";
+import Header from "../Header/Header"
+import Background from '../Background/Background'
 
 export default function TelaPesquisaConsulta() {
   const [nome, setNome] = useState("");
@@ -21,11 +22,11 @@ export default function TelaPesquisaConsulta() {
   }, []);
 
   return (
-    <>
-      <View style={styles.container}>
-        <Text>Especialidades: </Text>
-        <Carrousel />
-      </View>
-    </>
+    <Background >
+      <Header hasReturn={true} />
+      <Text style={{ marginLeft: 10, fontSize: 24 }}>Especialidades</Text>
+      <Carrousel />
+    </Background>
+
   );
 }
