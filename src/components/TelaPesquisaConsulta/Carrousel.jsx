@@ -27,7 +27,7 @@ export default function Carrousel() {
   const renderItem = ({ item }) => <Item title={item?.nomeEspecialidade} />;
 
   return (
-    <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
+    <View style={styles.carrousel}>
       <FlatList
         data={carousel}
         horizontal={true}
@@ -41,13 +41,19 @@ export default function Carrousel() {
 const styles = StyleSheet.create({
   item: {
     backgroundColor: "#f9c2ff",
-    width: 200,
+    width: 150,
     height: 50,
-    marginHorizontal: 16,
+    marginHorizontal: 8,
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
     fontSize: 15,
-  },
+  }, 
+  carrousel: {
+  flex: 1, 
+  flexDirection: "row", 
+  justifyContent: "center",
+  marginTop: 10
+}
 });
