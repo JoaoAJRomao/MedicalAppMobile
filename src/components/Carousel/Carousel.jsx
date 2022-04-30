@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, FlatList, TouchableOpacity } from "react-native";
 import { BuscarTodasEspecialidades } from "../../Services/AgendamentoService";
-import styles from './Carrousel.style'
+import styles from './Carousel.style'
 
 export default function Carrousel() {
   const [carousel, setcarousel] = useState([]);
@@ -30,10 +30,10 @@ export default function Carrousel() {
   return (
     <View style={styles.carrousel}>
       <FlatList
-        data={carousel}
-        horizontal={true}
-        renderItem={renderItem}
         keyExtractor={(item) => item.codigoEspecialidade}
+        horizontal={true}
+        data={carousel}
+        renderItem={renderItem}
       />
     </View>
   );
