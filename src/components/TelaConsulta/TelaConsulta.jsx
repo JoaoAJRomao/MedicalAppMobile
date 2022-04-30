@@ -44,54 +44,72 @@ export default function TelaConsulta() {
     }
 
     return (
-        <>
+        <View style={styles.page}>
             <StatusBar style="light" backgroundColor="#000" translucent={false} />
             <View style={styles.header}>
-                <Image
-                    source={require('../../../assets/MedicalAppIcon2.png')}
-                    style={{ width: 30, height: 30 }}
-                    resizeMode="contain"
-                />
-                <Text style={{ color: 'white' }}>
-                    Bem vindo {nome}
-                </Text>
-                <TouchableOpacity onPress={something}>
+                <View style={styles.headerIcons}>
                     <Image
-                        source={require('../../../assets/sanduicheIcon.png')}
+                        source={require('../../../assets/userGeneric.png')}
                         style={{ width: 30, height: 30 }}
                         resizeMode="contain"
                     />
-                </TouchableOpacity>
+                </View>
+                <View style={styles.headerOptions}>
+                    <TouchableOpacity onPress={something}>
+                        <Image
+                            source={require('../../../assets/notificacao.png')}
+                            style={styles.headerIcons}
+                            resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={something}>
+                        <Image
+                            source={require('../../../assets/menuLinhasHorizontais.png')}
+                            style={styles.headerIcons}
+                            resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
+
+            <Text style={{ marginLeft: 10, fontSize: 24 }}>Consultas</Text>
             <View style={styles.scrollview}>
                 <FlatList
                     keyExtractor={(item) => item.codigoConsulta}
                     data={consulta}
                     renderItem={({ item }) => (
                         <View style={styles.box}>
-                            <View style={styles.colorItem}></View>
                             <View style={styles.groupItem}>
-                                <Text style={styles.item}>{item.dataConsulta} as {item.horaConsulta}</Text>
-                                <Text style={styles.item}>{item.nomeEspecialidade} com {item.nomeMedico}</Text>
+                                <View style={styles.item}>
+                                    <Text style={styles.itemText}>{item.dataConsulta}</Text>
+                                    <Text style={styles.itemText}>{item.horaConsulta}</Text>
+                                </View>
+                                <View >
+                                    <Text style={styles.itemText}>{item.nomeMedico}</Text>                                    
+                                </View>
+                                <View style={styles.item}>
+                                    <Text style={styles.itemText}>Consulta</Text>
+                                    <Text style={styles.itemText}>{item.nomeEspecialidade}</Text>
+                                </View>
+
                             </View>
                         </View>
                     )}
                 />
-                <TouchableOpacity onPress={carregarLista} style={styles.scrollviewTouchable}>
-                    <Image source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2017/11/Floating_Button.png' }}
+                <TouchableOpacity onPress={something} style={styles.scrollviewTouchable}>
+                    <Image source={require('../../../assets/botaoAdicionar.png')}
                         style={styles.scrollviewImage}
                     />
                 </TouchableOpacity>
             </View>
             <View style={styles.footer}>
                 <TouchableOpacity onPress={something} style={styles.footerButton}>
-                    <Text> Curiosidade </Text>
+                    <Text> Perguntas </Text>
                 </TouchableOpacity>
-                <View style={styles.verticleLine}></View>
                 <TouchableOpacity onPress={something} style={styles.footerButton}>
                     <Text> Historico </Text>
                 </TouchableOpacity>
             </View>
-        </>
+        </View>
     );
 }

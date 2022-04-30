@@ -1,7 +1,11 @@
 import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
+    page: {
+        backgroundColor: '#C9D5D9',
+        flex: 1
+    },
     header: {
-        backgroundColor: '#101010',
+        backgroundColor: '#C9D5D9',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -9,40 +13,49 @@ export default StyleSheet.create({
         paddingLeft: 10,
         paddingTop: 10,
         paddingBottom: 10,
-        borderBottomWidth: 2,
-        borderBottomColor: 'yellow',
         marginTop: 5,
         marginLeft: 5,
         marginRight: 5,
         borderRadius: 5
     },
-    box: {
-        height: 100,
-        backgroundColor: '#DDD',
-        margin: 7,
-        borderRadius: 5,
+    headerOptions: {
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between'
     },
-    groupItem: {        
-        width: '70%',
-        marginStart: 10,
-    },
-    item: {
-        fontSize: 18,
-    },
-    colorItem: {
-        height: '80%',
-        width: '20%',
-        backgroundColor: 'blue',
-        marginLeft: 10,
-        borderRadius: 10
+    headerIcons: {
+        width: 30,
+        height: 30,
+        marginRight: 10,
+        marginLeft: 10
     },
     scrollview: {
         justifyContent: 'center',
         flex: 1,
-        margin: 10
+        margin: 10,
+        backgroundColor: '#777777',
+        elevation: 5,
+    },
+    box: {
+        height: 100,
+        backgroundColor: '#DDD',
+        margin: 7,
+        borderRadius: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+    },
+    groupItem: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'space-between',
+    },
+    item: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: 5
+    },
+    itemText: {
+        fontSize: 16
     },
     scrollviewTouchable: {
         position: 'absolute',
@@ -60,7 +73,6 @@ export default StyleSheet.create({
     },
     footer: {
         height: 100,
-        backgroundColor: 'white',
         marginLeft: 5,
         marginRight: 5,
         marginBottom: 5,
@@ -70,16 +82,18 @@ export default StyleSheet.create({
         borderRadius: 5
     },
     footerButton: {
-        backgroundColor: 'red',
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingRight: 10,
-        paddingLeft: 10,
-        borderRadius: 5
+        backgroundColor: '#38B6FF',
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingRight: 40,
+        paddingLeft: 40,
+        borderRadius: 10,        
+        elevation: 5
     },
-    verticleLine: {
-        height: '80%',
-        width: 1,
-        backgroundColor: '#909090',
+    shadow: {
+        shadowColor: '#171717',
+        shadowOffset: { width: -2, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
     }
 })
