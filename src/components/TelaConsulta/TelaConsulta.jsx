@@ -5,13 +5,14 @@ import {
     Text,
     StatusBar,
     TouchableOpacity,
-    Alert,
     FlatList
 } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import styles from './TelaConsulta.style'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ConsultaPorId } from '../../Services/AgendamentoService';
+import Header from '../Header/Header'
+import Background from '../Background/Background'
 
 export default function TelaConsulta() {
     const navigation = useNavigation()
@@ -44,34 +45,9 @@ export default function TelaConsulta() {
     }
 
     return (
-        <View style={styles.page}>
+        <Background>
             <StatusBar style="light" backgroundColor="#000" translucent={false} />
-            <View style={styles.header}>
-                <View style={styles.headerIcons}>
-                    <Image
-                        source={require('../../../assets/userGeneric.png')}
-                        style={{ width: 30, height: 30 }}
-                        resizeMode="contain"
-                    />
-                </View>
-                <View style={styles.headerOptions}>
-                    <TouchableOpacity onPress={something}>
-                        <Image
-                            source={require('../../../assets/notificacao.png')}
-                            style={styles.headerIcons}
-                            resizeMode="contain"
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={something}>
-                        <Image
-                            source={require('../../../assets/menuLinhasHorizontais.png')}
-                            style={styles.headerIcons}
-                            resizeMode="contain"
-                        />
-                    </TouchableOpacity>
-                </View>
-            </View>
-
+            <Header />
             <Text style={{ marginLeft: 10, fontSize: 24 }}>Consultas</Text>
             <View style={styles.scrollview}>
                 <FlatList
@@ -84,8 +60,8 @@ export default function TelaConsulta() {
                                     <Text style={styles.itemText}>{item.dataConsulta}</Text>
                                     <Text style={styles.itemText}>{item.horaConsulta}</Text>
                                 </View>
-                                <View style={{alignItems: 'center'}}>
-                                    <Text>{item.nomeMedico}</Text>                                    
+                                <View style={styles.itemTextMedic}>
+                                    <Text style={styles.itemText}>{item.nomeMedico}</Text>                                    
                                 </View>
                                 <View style={styles.item}>
                                     <Text style={styles.itemText}>Consulta</Text>
@@ -110,6 +86,6 @@ export default function TelaConsulta() {
                     <Text> Historico </Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </Background>
     );
 }

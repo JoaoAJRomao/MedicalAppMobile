@@ -1,42 +1,15 @@
 import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
-    page: {
-        backgroundColor: '#C9D5D9',
-        flex: 1
-    },
-    header: {
-        backgroundColor: '#C9D5D9',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingRight: 10,
-        paddingLeft: 10,
-        paddingTop: 10,
-        paddingBottom: 10,
-        marginTop: 5,
-        marginLeft: 5,
-        marginRight: 5,
-        borderRadius: 5
-    },
-    headerOptions: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    headerIcons: {
-        width: 30,
-        height: 30,
-        marginRight: 10,
-        marginLeft: 10
-    },
     scrollview: {
         justifyContent: 'center',
         flex: 1,
         margin: 10,
         backgroundColor: '#777777',
         elevation: 5,
+        borderRadius: 5
     },
     box: {
-        height: 100,
+        height: 110,
         backgroundColor: '#DDD',
         margin: 7,
         borderRadius: 10,
@@ -55,7 +28,10 @@ export default StyleSheet.create({
         margin: 5
     },
     itemText: {
-        fontSize: 16
+        fontSize: 20
+    },
+    itemTextMedic:{
+        alignItems: 'center'
     },
     scrollviewTouchable: {
         position: 'absolute',
