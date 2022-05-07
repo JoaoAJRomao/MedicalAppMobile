@@ -35,6 +35,20 @@ export default function TelaConsulta() {
         navigation.navigate('exibirconsulta')
     }
 
+   function verificarDataConsulta(data, hora){
+    var dateAgora = new Date().toLocaleString();
+    const dateConsulta = (data +' '+hora+':00').split('/').reverse().join('-')
+    var dateAgoraConvertida = new Date(dateAgora)
+    const dataconvertida = new Date(dateConsulta)
+    
+    if(dateAgoraConvertida >= dataconvertida)
+    {
+        return require("@expo/../../assets/verde.png")
+    }else{
+        return require("@expo/../../assets/vermelho.png")
+    }
+   }
+
     async function carregarLista(idCliente, tokenclient) {
         const params = {
             idClient: idCliente,
@@ -61,7 +75,8 @@ export default function TelaConsulta() {
                                     <Text style={styles.itemText}>{item.horaConsulta}</Text>
                                 </View>
                                 <View style={styles.itemTextMedic}>
-                                    <Text style={styles.itemText}>{item.nomeMedico}</Text>                                    
+                                    <Text style={styles.itemText}>{item.nomeMedico}</Text> 
+                                    <Image style={{justifyContent: 'space-between'}} source={verificarDataConsulta(item.dataConsulta, item.horaConsulta)} />                                   
                                 </View>
                                 <View style={styles.item}>
                                     <Text style={styles.itemText}>Consulta</Text>
@@ -81,9 +96,6 @@ export default function TelaConsulta() {
             <View style={styles.footer}>
                 <TouchableOpacity onPress={something} style={styles.footerButton}>
                     <Text> Perguntas </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={something} style={styles.footerButton}>
-                    <Text> Historico </Text>
                 </TouchableOpacity>
             </View>
         </Background>

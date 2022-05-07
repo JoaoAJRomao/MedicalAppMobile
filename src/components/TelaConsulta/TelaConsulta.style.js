@@ -31,7 +31,9 @@ export default StyleSheet.create({
         fontSize: 20
     },
     itemTextMedic:{
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: "row"
     },
     scrollviewTouchable: {
         position: 'absolute',
