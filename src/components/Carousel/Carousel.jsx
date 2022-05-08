@@ -3,7 +3,6 @@ import {
   Text,
   View,
   FlatList,
-  StyleSheet,
   TouchableOpacity,
   Image
 } from "react-native";
@@ -11,8 +10,10 @@ import {
   BuscarDoutorPorEspecialidade,
   BuscarTodasEspecialidades,
 } from "../../Services/AgendamentoService";
+import BuscaPorMedico from "../BuscaPorMedico/BuscaPorMedico";
+import styles from './Carousel.style'
 
-export default function Carrousel() {
+export default function Carrousel({setSpecialty}) {
   const [carousel, setcarousel] = useState([]);
   const [carouselMedicos, setcarouselMedicos] = useState([]);
   const [especialidadeEscolhida, setEspecialidadeEscolhida] = useState(0);
@@ -26,15 +27,17 @@ export default function Carrousel() {
     setEspecialidadeEscolhida(codigoEspecialidade);
     const doutores = await BuscarDoutorPorEspecialidade(codigoEspecialidade);
     setcarouselMedicos(doutores[0].data);
+    setSpecialty(codigoEspecialidade)
   };
 
   return (
-    <View style={styles.View}>
+    <View>
       <View style={styles.carrousel}>
         <FlatList
           keyExtractor={(item) => item.codigoEspecialidade}
           data={carousel}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => buscarMedico(item.codigoEspecialidade)}
@@ -45,58 +48,6 @@ export default function Carrousel() {
           )}
         />
       </View>
-
-      <View style={styles.carrouselMedicos}>
-        <FlatList
-          keyExtractor={(item) => item.crm}
-          data={carouselMedicos}
-          renderItem={({ item }) => (<View style={{flexDirection: "row"}}>
-            <Image
-          style={styles.imagemMedico}
-          source={require("@expo/../../assets/MedicalAppIcon2.png")}
-        />
-            <TouchableOpacity
-              onPress={() => console.log(item)}
-              style={styles.item}
-            >
-              <Text style={styles.title}>{item?.nomeMedico}</Text>
-            </TouchableOpacity>
-            </View>)}
-        />
-      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  View: {
-    flex: 1,
-  },
-  item: {
-    backgroundColor: "#f9c2ff",
-    width: 150,
-    height: 50,
-    marginHorizontal: 8,
-    marginTop:10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 15,
-  },
-  carrousel: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 10,
-  },
-  carrouselMedicos: {
-    flex: 5,
-    alignItems: "center",
-  },imagemMedico:{
-    borderRadius: 150, 
-    width: 50 ,
-    height: 50,
-    marginTop:10
-  }
-});
