@@ -3,19 +3,13 @@ import {
   Text,
   View,
   FlatList,
-  TouchableOpacity,
-  Image
+  TouchableOpacity
 } from "react-native";
-import {
-  BuscarDoutorPorEspecialidade,
-  BuscarTodasEspecialidades,
-} from "../../Services/AgendamentoService";
-import BuscaPorMedico from "../BuscaPorMedico/BuscaPorMedico";
+import { BuscarTodasEspecialidades } from "../../Services/AgendamentoService";
 import styles from './Carousel.style'
 
-export default function Carrousel({setSpecialty}) {
+export default function Carrousel({ setSpecialty }) {
   const [carousel, setcarousel] = useState([]);
-  const [carouselMedicos, setcarouselMedicos] = useState([]);
   const [especialidadeEscolhida, setEspecialidadeEscolhida] = useState(0);
 
   useEffect(async () => {
@@ -25,8 +19,6 @@ export default function Carrousel({setSpecialty}) {
 
   const buscarMedico = async (codigoEspecialidade) => {
     setEspecialidadeEscolhida(codigoEspecialidade);
-    const doutores = await BuscarDoutorPorEspecialidade(codigoEspecialidade);
-    setcarouselMedicos(doutores[0].data);
     setSpecialty(codigoEspecialidade)
   };
 
@@ -38,12 +30,13 @@ export default function Carrousel({setSpecialty}) {
           data={carousel}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
+          extraData={especialidadeEscolhida}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => buscarMedico(item.codigoEspecialidade)}
               style={styles.item}
             >
-              <Text style={styles.title}>{item?.nomeEspecialidade}</Text>
+              <Text style={[styles.title, item.codigoEspecialidade == especialidadeEscolhida ? styles.titleSelected : styles.title]}>{item?.nomeEspecialidade}</Text>
             </TouchableOpacity>
           )}
         />

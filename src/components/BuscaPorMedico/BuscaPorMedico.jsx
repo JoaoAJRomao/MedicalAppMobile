@@ -3,11 +3,11 @@ import {
     Text,
     View,
     FlatList,
-    StyleSheet,
     TouchableOpacity,
     Image
 } from "react-native";
 import { BuscarDoutorPorEspecialidade } from "../../Services/AgendamentoService";
+import styles from './BuscaPorMedico.style'
 
 export default function BuscaPorMedico({ specialty }) {
 
@@ -19,15 +19,16 @@ export default function BuscaPorMedico({ specialty }) {
     }, [specialty])
 
     return (
-        <View style={{ alignItems:"center"}}>
+        <View style={styles.mainView}>
             <FlatList
                 keyExtractor={(item) => item.crm}
                 data={carouselMedicos}
                 renderItem={({ item }) => (
-                    <View style={{ flexDirection: "row", alignItems:"center" }}>
+                    <View style={styles.box}>
                         <Image
-                            style={styles.imagemMedico}
+                            style={styles.headerIcons}
                             source={require("@expo/../../assets/MedicalAppIcon2.png")}
+                            resizeMode="contain"
                         />
                         <TouchableOpacity
                             onPress={() => console.log(item)}
@@ -41,35 +42,3 @@ export default function BuscaPorMedico({ specialty }) {
     )
 }
 
-const styles = StyleSheet.create({
-    View: {
-        flex: 1,
-    },
-    item: {
-        backgroundColor: "#f9c2ff",
-        width: 150,
-        height: 50,
-        marginHorizontal: 8,
-        marginTop: 10,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    title: {
-        fontSize: 15,
-    },
-    carrousel: {
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "center",
-        marginTop: 10,
-    },
-    carrouselMedicos: {
-        flex: 5,
-        alignItems: "center",
-    }, imagemMedico: {
-        borderRadius: 150,
-        width: 50,
-        height: 50,
-        marginTop: 10
-    }
-});

@@ -8,7 +8,7 @@ import BuscaPorData from "../BuscaPorData/BuscaPorData";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 export default function TelaPesquisaConsulta() {
-  const [specialty, setSpecialty] = useState(0);
+  const [specialty, setSpecialty] = useState(5);
   const Tab = createMaterialTopTabNavigator();
   return (
     <Background >
