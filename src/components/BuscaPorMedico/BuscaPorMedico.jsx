@@ -27,14 +27,14 @@ export default function BuscaPorMedico({ specialty }) {
                     <View style={styles.box}>
                         <Image
                             style={styles.headerIcons}
-                            source={require("@expo/../../assets/MedicalAppIcon2.png")}
+                            source={require("@expo/../../assets/medico.png")}
                             resizeMode="contain"
                         />
                         <TouchableOpacity
                             onPress={() => console.log(item)}
-                            style={styles.item}
+                            style={{width: 250, height: 50, marginVertical: 15, marginLeft: 10, backgroundColor: "#FFFF", justifyContent: 'center', borderRadius:10}}
                         >
-                            <Text style={styles.title}>{item?.nomeMedico}</Text>
+                            <Text style={{marginLeft: 10, fontSize: 18}}>{item?.nomeMedico}</Text>
                         </TouchableOpacity>
                     </View>)}
             />

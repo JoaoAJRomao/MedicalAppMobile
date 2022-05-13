@@ -7,12 +7,13 @@ export default StyleSheet.create({
         marginHorizontal: 16,
     },
     box: {        
-        flexDirection: 'row',        
+        flexDirection: 'row',  
+        alignItems: "center",      
     },
     headerIcons: {
-        width: 30,
-        height: 30,
-        marginRight: 10,
-        marginLeft: 10
+        borderRadius: 130, 
+        width: 50 ,
+        height: 50,
+        marginTop:10
     }
 })
