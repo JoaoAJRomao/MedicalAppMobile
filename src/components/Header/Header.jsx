@@ -22,7 +22,7 @@ export default function Header(props) {
                     resizeMode="contain"
                 />
                 {props?.hasReturn &&
-                    <TouchableOpacity onPress={something}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image
                             source={require('../../../assets/returnIconHeader.png')}
                             style={styles.headerIcons}

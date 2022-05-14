@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react'
 import {
     Text,
@@ -10,7 +11,7 @@ import { BuscarDoutorPorEspecialidade } from "../../Services/AgendamentoService"
 import styles from './BuscaPorMedico.style'
 
 export default function BuscaPorMedico({ specialty }) {
-
+    const navigation = useNavigation()
     const [carouselMedicos, setCarouselMedicos] = useState([]);
 
     useEffect(async () => {
@@ -31,7 +32,11 @@ export default function BuscaPorMedico({ specialty }) {
                             resizeMode="contain"
                         />
                         <TouchableOpacity
-                            onPress={() => console.log(item)}
+                            onPress={() => navigation.navigate({
+                                name: 'MarcarConsultaMedico',
+                                params: { post: item },
+                                merge: true,
+                              })}
                             style={{width: 250, height: 50, marginVertical: 15, marginLeft: 10, backgroundColor: "#FFFF", justifyContent: 'center', borderRadius:10}}
                         >
                             <Text style={{marginLeft: 10, fontSize: 18}}>{item?.nomeMedico}</Text>
