@@ -1,47 +1,78 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, Image } from "react-native";
-import styles from "../BuscaPorMedico/BuscaPorMedico.style";
-import {Calendar} from 'react-native-calendars'
+import { Text, View, Image, TouchableOpacity, StatusBar } from "react-native";
+import styles from "../MarcarConsultaMedico/MarcarConsultaMedico.style";
+import { Calendar, LocaleConfig } from 'react-native-calendars'
+import Header from '../Header/Header'
+import Background from '../Background/Background'
+import moment from "moment";
+import { brazilLenguage } from '../../util/LocalizacaoCalendario'
 
 export default function MarcarConsultaMedico(medicoEscolhido) {
+  const todayIs = moment(new Date()).format("YYYY-MM-DD");
   const [dadosMedico, setDadosMedico] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(todayIs);
+
+  LocaleConfig.locales['br'] = {
+    monthNames: brazilLenguage.monthNames,
+    monthNamesShort: brazilLenguage.dayNamesShort,
+    dayNames: brazilLenguage.dayNames,
+    dayNamesShort: brazilLenguage.dayNamesShort,
+    today: brazilLenguage.today
+  };
+  LocaleConfig.defaultLocale = 'br';
 
   useEffect(() => {
     const medicoParams = medicoEscolhido.route.params.post;
     setDadosMedico(medicoParams);
   }, [medicoEscolhido.route.params.post]);
 
+  const mark = {
+    [selectedDate]: { selected: true, selectedColor: '#6EC84E' },
+  }
+
   return (
-      <View style={{ 
-        alignItems: "center",
-        flex: 1,
-        margin:8}}>
-        <Text style={{fontSize: 15 }}>
-          Médico selecionado:
-        </Text>
-        <Image
-          style={styles.headerIcons}
-          source={require("@expo/../../assets/medico.png")}
-          resizeMode="contain"/>
-        <View
-          style={{width: 225,
-            height: 50,
-            marginVertical: 15,
-            marginLeft: 10,
-            backgroundColor: "#FFFF",
-            justifyContent: "center",
-            borderRadius: 10,
-            alignItems: "center"
-          }}>
-        <Text style={{fontSize: 20 }}>
-          {dadosMedico?.nomeMedico}
-        </Text>
-        </View>
+    <Background>
+      <StatusBar style="light" backgroundColor="#000" translucent={false} />
+      <Header hasReturn={true} />
+      <Text style={styles.titleText}>
+        Médico selecionado:
+      </Text>
+      <View style={styles.content}>
+        <View style={styles.organizerHeader}>
+          <Image
+            style={styles.genericImage}
+            source={require("@expo/../../assets/medico.png")}
+            resizeMode="contain" />
+          <View
+            style={styles.card}>
+            <Text style={styles.textMedic}>
+              {dadosMedico?.nomeMedico}
+            </Text>
 
-          <View>
-          <Calendar />
           </View>
-
+        </View>
+        <View>
+          <Calendar
+            style={styles.calendar}
+            minDate={todayIs}
+            enableSwipeMonths={true}
+            disableAllTouchEventsForDisabledDays={true}
+            onDayPress={day => {
+              setSelectedDate(day.dateString);
+            }}
+            markedDates={mark}            
+          />
+        </View>
+        <TouchableOpacity
+          style={styles.button}
+        >
+          <Text
+            style={styles.textButton}
+          >
+            Confirma?
+          </Text>
+        </TouchableOpacity>
       </View>
+    </Background>
   );
 }
