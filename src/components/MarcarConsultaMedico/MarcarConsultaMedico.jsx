@@ -5,7 +5,7 @@ import { Calendar, LocaleConfig } from 'react-native-calendars'
 import Header from '../Header/Header'
 import Background from '../Background/Background'
 import moment from "moment";
-import { brazilLenguage } from '../../util/LocalizacaoCalendario'
+import { brazilLanguage } from '../../util/LocalizacaoCalendario'
 
 export default function MarcarConsultaMedico(medicoEscolhido) {
   const todayIs = moment(new Date()).format("YYYY-MM-DD");
@@ -13,11 +13,11 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
   const [selectedDate, setSelectedDate] = useState(todayIs);
 
   LocaleConfig.locales['br'] = {
-    monthNames: brazilLenguage.monthNames,
-    monthNamesShort: brazilLenguage.dayNamesShort,
-    dayNames: brazilLenguage.dayNames,
-    dayNamesShort: brazilLenguage.dayNamesShort,
-    today: brazilLenguage.today
+    monthNames: brazilLanguage.monthNames,
+    monthNamesShort: brazilLanguage.dayNamesShort,
+    dayNames: brazilLanguage.dayNames,
+    dayNamesShort: brazilLanguage.dayNamesShort,
+    today: brazilLanguage.today
   };
   LocaleConfig.defaultLocale = 'br';
 

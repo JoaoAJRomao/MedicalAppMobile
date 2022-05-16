@@ -1,4 +1,4 @@
-export const brazilLenguage = {
+export const brazilLanguage = {
     monthNames: [
         'Janeiro',
         'Fevereiro',
