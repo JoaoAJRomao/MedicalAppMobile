@@ -58,6 +58,7 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
             enableSwipeMonths={true}
             disableAllTouchEventsForDisabledDays={true}
             onDayPress={day => {
+              console.log(day)
               setSelectedDate(day.dateString);
             }}
             markedDates={mark}            
@@ -69,7 +70,7 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
           <Text
             style={styles.textButton}
           >
-            Confirma?
+            Confirmar
           </Text>
         </TouchableOpacity>
       </View>
