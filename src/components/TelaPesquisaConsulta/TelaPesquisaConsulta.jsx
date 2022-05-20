@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
-import Carousel from "../Carousel/Carousel";
+import { Text } from "react-native";
+import Carousel from "./Carousel/Carousel";
 import Header from "../Header/Header"
 import Background from '../Background/Background'
-import BuscaPorMedico from '../BuscaPorMedico/BuscaPorMedico'
-import BuscaPorData from "../BuscaPorData/BuscaPorData";
+import BuscaPorMedico from './BuscaPorMedico/BuscaPorMedico'
+import BuscaPorData from "./BuscaPorData/BuscaPorData";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 export default function TelaPesquisaConsulta() {

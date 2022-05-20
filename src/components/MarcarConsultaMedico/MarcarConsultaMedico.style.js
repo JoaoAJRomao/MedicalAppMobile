@@ -34,7 +34,7 @@ export default StyleSheet.create({
     calendar: {
         height: 350,
         width: 360,
-        borderRadius: 10
+        borderRadius: 10,
     },
     button: {
         width: 320,

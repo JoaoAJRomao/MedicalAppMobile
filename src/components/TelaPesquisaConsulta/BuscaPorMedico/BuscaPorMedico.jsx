@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     Image
 } from "react-native";
-import { BuscarDoutorPorEspecialidade } from "../../Services/AgendamentoService";
+import { BuscarDoutorPorEspecialidade } from "../../../Services/AgendamentoService";
 import styles from './BuscaPorMedico.style'
 
 export default function BuscaPorMedico({ specialty }) {

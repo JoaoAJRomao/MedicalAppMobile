@@ -5,7 +5,7 @@ import {
   FlatList,
   TouchableOpacity
 } from "react-native";
-import { BuscarTodasEspecialidades } from "../../Services/AgendamentoService";
+import { BuscarTodasEspecialidades } from "../../../Services/AgendamentoService";
 import styles from './Carousel.style'
 
 export default function Carrousel({ setSpecialty }) {

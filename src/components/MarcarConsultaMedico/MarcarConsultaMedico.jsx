@@ -6,11 +6,15 @@ import Header from '../Header/Header'
 import Background from '../Background/Background'
 import moment from "moment";
 import { brazilLanguage } from '../../util/LocalizacaoCalendario'
+import Calendario from "./Calendario/Calendario";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import MarcarHoraConsulta from './MarcarHoraConsulta';
 
 export default function MarcarConsultaMedico(medicoEscolhido) {
   const todayIs = moment(new Date()).format("YYYY-MM-DD");
   const [dadosMedico, setDadosMedico] = useState([]);
   const [selectedDate, setSelectedDate] = useState(todayIs);
+  const Tab = createMaterialTopTabNavigator();
 
   LocaleConfig.locales['br'] = {
     monthNames: brazilLanguage.monthNames,
@@ -48,22 +52,15 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
             <Text style={styles.textMedic}>
               {dadosMedico?.nomeMedico}
             </Text>
-
           </View>
         </View>
-        <View>
-          <Calendar
-            style={styles.calendar}
-            minDate={todayIs}
-            enableSwipeMonths={true}
-            disableAllTouchEventsForDisabledDays={true}
-            onDayPress={day => {
-              console.log(day)
-              setSelectedDate(day.dateString);
-            }}
-            markedDates={mark}            
-          />
-        </View>
+
+        <Tab.Navigator>
+          <Tab.Screen name="calendario"
+            children={() => <Calendario selectedDate={selectedDate} setSelectedDate={setSelectedDate} todayIs={todayIs} />} />
+          <Tab.Screen name="horarios"  component={MarcarHoraConsulta}/>
+        </Tab.Navigator>        
+        {/* <Calendario selectedDate={selectedDate} setSelectedDate={setSelectedDate} todayIs={todayIs} /> */}
         <TouchableOpacity
           style={styles.button}
         >
