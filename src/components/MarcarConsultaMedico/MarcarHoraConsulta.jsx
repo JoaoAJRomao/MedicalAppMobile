@@ -9,13 +9,13 @@ export default function MarcarHoraConsulta() {
 
   return (
     <View>
-      <View style={{ width: '315', height: '50', borderRadius: 12 }}>
+      <View style={{ width: 315, height: 50, borderRadius: 12 }}>
         <Text>
           Escolha um horário disponível:
         </Text>
       </View>
 
-      <View style={{ width: '320', height: '310', borderRadius: 12 }}>
+      <View style={{ width: 320, height: 310, borderRadius: 12 }}>
         <FlatList
           keyExtractor={(item) => item.id}
           data={oi}

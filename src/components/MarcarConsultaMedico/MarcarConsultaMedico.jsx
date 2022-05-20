@@ -7,14 +7,16 @@ import Background from '../Background/Background'
 import moment from "moment";
 import { brazilLanguage } from '../../util/LocalizacaoCalendario'
 import Calendario from "./Calendario/Calendario";
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import MarcarHoraConsulta from './MarcarHoraConsulta';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useNavigation } from "@react-navigation/native";
 
 export default function MarcarConsultaMedico(medicoEscolhido) {
+  const Stack = createNativeStackNavigator();
   const todayIs = moment(new Date()).format("YYYY-MM-DD");
   const [dadosMedico, setDadosMedico] = useState([]);
   const [selectedDate, setSelectedDate] = useState(todayIs);
-  const Tab = createMaterialTopTabNavigator();
+  const navigation = useNavigation()
 
   LocaleConfig.locales['br'] = {
     monthNames: brazilLanguage.monthNames,
@@ -41,6 +43,13 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
       <Text style={styles.titleText}>
         Médico selecionado:
       </Text>
+
+        <Stack.Navigator screenOptions={{ headerShown: false}} >
+          <Stack.Screen name="calendario"
+            children={() => <Calendario selectedDate={selectedDate} setSelectedDate={setSelectedDate} todayIs={todayIs} />}/>
+        <Stack.Screen name="horarios"  component={MarcarHoraConsulta} /> 
+        </Stack.Navigator>  
+
       <View style={styles.content}>
         <View style={styles.organizerHeader}>
           <Image
@@ -54,20 +63,16 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
             </Text>
           </View>
         </View>
-
-        <Tab.Navigator>
-          <Tab.Screen name="calendario"
-            children={() => <Calendario selectedDate={selectedDate} setSelectedDate={setSelectedDate} todayIs={todayIs} />} />
-          <Tab.Screen name="horarios"  component={MarcarHoraConsulta}/>
-        </Tab.Navigator>        
+        
         {/* <Calendario selectedDate={selectedDate} setSelectedDate={setSelectedDate} todayIs={todayIs} /> */}
         <TouchableOpacity
           style={styles.button}
+          onPress={() => navigation.navigate('horarios')}
         >
           <Text
             style={styles.textButton}
           >
-            Confirmar
+            Escolher Data
           </Text>
         </TouchableOpacity>
       </View>
