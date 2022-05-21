@@ -74,8 +74,10 @@ export async function CriarNovaConsulta(params) {
 
 export async function DeletarConsultaPorId(params) {
     const estrutura = []
-  
-    await api.delete(`/Consulta/deleteQueryById?IdClient=${params.key}`, )
+    const tokenclient = await AsyncStorage.getItem("TOKEN")
+    await api.delete(`/Consulta/deleteQueryById?IdClient=${params}`, {headers: {
+      Authorization: `Bearer ${tokenclient}`
+      }})
       .then((res) => {
         estrutura.push(res.data.data)
       }).catch((err) => {

@@ -5,12 +5,13 @@ import {
     Text,
     StatusBar,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    Alert
 } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import styles from './TelaConsulta.style'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ConsultaPorId } from '../../Services/AgendamentoService';
+import { ConsultaPorId, DeletarConsultaPorId } from '../../Services/AgendamentoService';
 import Header from '../Header/Header'
 import Background from '../Background/Background'
 
@@ -58,6 +59,33 @@ export default function TelaConsulta() {
         setConsulta(res[0])
     }
 
+    
+
+    const clickConsulta =(dados)=> {
+            console.log(dados)
+            Alert.alert(
+                'Cancelamento de Consulta', 
+                'Deseja cancelar a consulta ?',
+                [
+                  { text: 'Sim', 
+                  onPress: async () => {
+                      await DeletarConsultaPorId(dados.codigoConsulta)
+                      setConsulta(consulta.filter(item => item.codigoConsulta !== dados.codigoConsulta))
+                    }},
+                  {
+                    text: 'Não',
+                    onPress: () => console.log('Não Cancelou'),
+                    style: 'cancel',
+                  },
+                ],
+                { cancelable: false }
+              );
+    }
+
+    const cancelarConsulta = async (codigoConsulta) => {
+        await DeletarConsultaPorId(codigoConsulta)
+    }
+
     return (
         <Background>
             <StatusBar style="light" backgroundColor="#000" translucent={false} />
@@ -70,19 +98,20 @@ export default function TelaConsulta() {
                     renderItem={({ item }) => (
                         <View style={styles.box}>
                             <View style={styles.groupItem}>
+                            <TouchableOpacity onPress={()=> clickConsulta(item)}>
                                 <View style={styles.item}>
                                     <Text style={styles.itemText}>{item.dataConsulta}</Text>
                                     <Text style={styles.itemText}>{item.horaConsulta}</Text>
                                 </View>
                                 <View style={styles.itemTextMedic}>
                                     <Text style={styles.itemText}>{item.nomeMedico}</Text> 
-                                    <Image style={{justifyContent: 'space-between'}} source={verificarDataConsulta(item.dataConsulta, item.horaConsulta)} />                                   
+                                    <Image style={{justifyContent: 'space-between', marginLeft: 10}} source={verificarDataConsulta(item.dataConsulta, item.horaConsulta)} />                                   
                                 </View>
                                 <View style={styles.item}>
                                     <Text style={styles.itemText}>Consulta</Text>
                                     <Text style={styles.itemText}>{item.nomeEspecialidade}</Text>
                                 </View>
-
+                            </TouchableOpacity>
                             </View>
                         </View>
                     )}
