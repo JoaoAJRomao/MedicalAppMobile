@@ -4,6 +4,8 @@ export default StyleSheet.create({
         alignItems: "center",
         flex: 1,
         margin: 8,
+        justifyContent: 'center',
+        alignItems: "center",
     },
     titleText: {
         fontSize: 24,
@@ -31,10 +33,9 @@ export default StyleSheet.create({
     textMedic: {
         fontSize: 24,
     },
-    calendar: {
+    contentShared: {
         height: 350,
         width: 360,
-        borderRadius: 10,
     },
     button: {
         width: 320,

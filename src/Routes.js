@@ -5,7 +5,8 @@ import Login from './components/TelaLogin/Login';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TelaPesquisaConsulta from './components/TelaPesquisaConsulta/TelaPesquisaConsulta';
-import MarcarConsultaMedico from './components/MarcarConsultaMedico/MarcarConsultaMedico';
+import TelaMarcacao from './components/TelaMarcacao/TelaMarcacao';
+import ListaHorarios from './components/TelaMarcacao/ListaHorarios/ListaHorarios';
 
 
 export default function Routes() {
@@ -20,7 +21,8 @@ export default function Routes() {
         <Stack.Screen name="consulta" component={Consulta} />
         <Stack.Screen name="exibirconsulta" component={TelaPesquisaConsulta} />
         <Stack.Screen name="cadastro" component={CadastroCliente} />
-        <Stack.Screen name="MarcarConsultaMedico" component={MarcarConsultaMedico} />
+        <Stack.Screen name="TelaMarcacao" component={TelaMarcacao} />
+        {/* <Stack.Screen name="ListaHorarios" component={ListaHorarios} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   )

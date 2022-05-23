@@ -33,13 +33,13 @@ export default function BuscaPorMedico({ specialty }) {
                         />
                         <TouchableOpacity
                             onPress={() => navigation.navigate({
-                                name: 'MarcarConsultaMedico',
+                                name: 'TelaMarcacao',
                                 params: { post: item },
                                 merge: true,
-                              })}
-                            style={{width: 250, height: 50, marginVertical: 15, marginLeft: 10, backgroundColor: "#FFFF", justifyContent: 'center', borderRadius:10}}
+                            })}
+                            style={{ width: 250, height: 50, marginVertical: 15, marginLeft: 10, backgroundColor: "#FFFF", justifyContent: 'center', borderRadius: 10 }}
                         >
-                            <Text style={{marginLeft: 10, fontSize: 18}}>{item?.nomeMedico}</Text>
+                            <Text style={{ marginLeft: 10, fontSize: 18 }}>{item?.nomeMedico}</Text>
                         </TouchableOpacity>
                     </View>)}
             />
