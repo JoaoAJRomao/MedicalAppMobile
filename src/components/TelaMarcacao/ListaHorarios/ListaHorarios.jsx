@@ -19,11 +19,11 @@ export default function ListaHorarios({ dadosMedico, selectedDate }) {
       res[0].data.forEach(e => {
         consultasMarcadas.push(e.horaConsulta)
       });
-      const listaHorarios = await CreateWorkingTrack(`${dadosMedico.horarioAtendimentoInicial}-${dadosMedico.horarioAtendimentoFinal}`, 20, consultasMarcadas);      
+      const listaHorarios = await CreateWorkingTrack(`${dadosMedico.horarioAtendimentoInicial}-${dadosMedico.horarioAtendimentoFinal}`, 20, consultasMarcadas);
       setHorariosDisponiveis(adicionandoID(listaHorarios));
-      console.log(horariosDisponiveis);
     } else {
-      setHorariosDisponiveis([''])
+      const listaHorarios = await CreateWorkingTrack(`${dadosMedico.horarioAtendimentoInicial}-${dadosMedico.horarioAtendimentoFinal}`, 20, consultasMarcadas);
+      setHorariosDisponiveis(adicionandoID(listaHorarios));
     }
   }, [])
 
