@@ -1,4 +1,4 @@
-export async function createWorkingTrack(timeSchedule, intervalTime, guardarHorariosOcupados) {
+export async function CreateWorkingTrack(timeSchedule, intervalTime, guardarHorariosOcupados) {
   timeSchedule = timeSchedule?.split("-");
   var start = parseInt(timeSchedule[0], 10);
   var end = parseInt(timeSchedule[1], 10);

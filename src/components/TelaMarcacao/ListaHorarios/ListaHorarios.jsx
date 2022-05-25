@@ -1,39 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
 import { BuscarFilaPorMedicoeDataConsulta } from '../../../Services/AgendamentoService'
+import { CreateWorkingTrack } from '../../../util/WorkingTrackAssistant'
 import moment from 'moment'
 
 export default function ListaHorarios({ dadosMedico, selectedDate }) {
   const [horariosDisponiveis, setHorariosDisponiveis] = useState([])
-  const mock = [
-    {
-      codigoConsulta: 105,
-      codigoEspecialidade: 5,
-      convenioCliente: "unimed",
-      crmMedico: 12345,
-      dataConsulta: "21/05/2022",
-      horaConsulta: "07:00",
-      idCliente: 45,
-    },
-    {
-      codigoConsulta: 155,
-      codigoEspecialidade: 5,
-      convenioCliente: "unimed",
-      crmMedico: 12345,
-      dataConsulta: "21/05/2022",
-      horaConsulta: "09:00",
-      idCliente: 45,
-    },
-    {
-      codigoConsulta: 185,
-      codigoEspecialidade: 5,
-      convenioCliente: "unimed",
-      crmMedico: 12345,
-      dataConsulta: "21/05/2022",
-      horaConsulta: "10:00",
-      idCliente: 45,
-    }
-  ]
 
   useEffect(async () => {
     const params = {
@@ -47,33 +19,24 @@ export default function ListaHorarios({ dadosMedico, selectedDate }) {
       res[0].data.forEach(e => {
         consultasMarcadas.push(e.horaConsulta)
       });
-      const listaHorarios = await createWorkingTrack(`${dadosMedico.horarioAtendimentoInicial}-${dadosMedico.horarioAtendimentoFinal}`, 20, consultasMarcadas)
-      setHorariosDisponiveis([...listaHorarios]);
+      const listaHorarios = await CreateWorkingTrack(`${dadosMedico.horarioAtendimentoInicial}-${dadosMedico.horarioAtendimentoFinal}`, 20, consultasMarcadas);      
+      setHorariosDisponiveis(adicionandoID(listaHorarios));
       console.log(horariosDisponiveis);
     } else {
       setHorariosDisponiveis([''])
     }
   }, [])
 
-  async function createWorkingTrack(timeSchedule, intervalTime, guardarHorariosOcupados) {
-    timeSchedule = timeSchedule.split("-");
-    var start = parseInt(timeSchedule[0], 10);
-    var end = parseInt(timeSchedule[1], 10);
-    var workingTrack = [];
-    for (let hours = start; hours < end; hours++) {
-      for (let minutes = 0; minutes < 60; minutes += intervalTime) {
-        var date = new Date();
-        date.setHours(hours);
-        date.setMinutes(minutes);
-        var schedule = ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
-        workingTrack.push(schedule);
-      }
-    }
-    if (workingTrack.length !== 0 && guardarHorariosOcupados.length !== 0) {
-      let horasNaoMarcadas = workingTrack.filter(a => !guardarHorariosOcupados.includes(a))
-      return horasNaoMarcadas
-    }
-    return workingTrack;
+  function adicionandoID(lista) {
+    let count = 0;
+    let array = [];
+    lista.map(item => {
+      array.push({
+        id: count++,
+        horario: item
+      })
+    });
+    return array;
   }
 
   return (
@@ -88,8 +51,8 @@ export default function ListaHorarios({ dadosMedico, selectedDate }) {
         width: 320, height: 310, borderRadius: 12, alignItems: 'center', justifyContent: 'center',
       }}>
         <FlatList
-          keyExtractor={(item) => item.codigoConsulta}
-          data={mock}
+          keyExtractor={(item) => item.id}
+          data={horariosDisponiveis}
           renderItem={(item) =>
             <View style={{
               height: 50,
@@ -105,7 +68,7 @@ export default function ListaHorarios({ dadosMedico, selectedDate }) {
                 onPress={() => console.log(item)}
                 style={{ width: 250, height: 50, marginVertical: 15, marginLeft: 10, justifyContent: 'center', alignItems: 'center', borderRadius: 10 }}
               >
-                <Text style={{ marginLeft: 10, fontSize: 18 }}>{item.item.horaConsulta}</Text>
+                <Text style={{ marginLeft: 10, fontSize: 18 }}>{item.item.horario}</Text>
               </TouchableOpacity>
             </View>
           }
