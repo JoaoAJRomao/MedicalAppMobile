@@ -22,7 +22,7 @@ export default function Calendario({ selectedDate, setSelectedDate, todayIs }) {
             enableSwipeMonths={true}
             disableAllTouchEventsForDisabledDays={true}
             onDayPress={day => {
-                console.log(day)
+                // console.log(day)
                 setSelectedDate(day.dateString);
             }}
             markedDates={mark}

@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
 import { BuscarFilaPorMedicoeDataConsulta } from '../../../Services/AgendamentoService'
 import moment from 'moment'
 
 export default function ListaHorarios({ dadosMedico, selectedDate }) {
+  const [horariosDisponiveis, setHorariosDisponiveis] = useState([])
   const mock = [
     {
       codigoConsulta: 105,
@@ -39,12 +40,22 @@ export default function ListaHorarios({ dadosMedico, selectedDate }) {
       medicoAtual: dadosMedico.crm,
       DataConsulta: moment(selectedDate).format('DD/MM/YYYY')
     }
-    const consultasMarcadas = await BuscarFilaPorMedicoeDataConsulta(params)
-    console.log(dadosMedico)
-    console.log(consultasMarcadas)
+    //*Busca consultas marcadas para o dia selecionado
+    const res = await BuscarFilaPorMedicoeDataConsulta(params)
+    let consultasMarcadas = [];
+    if (res[0].success === true) {
+      res[0].data.forEach(e => {
+        consultasMarcadas.push(e.horaConsulta)
+      });
+      const listaHorarios = await createWorkingTrack(`${dadosMedico.horarioAtendimentoInicial}-${dadosMedico.horarioAtendimentoFinal}`, 20, consultasMarcadas)
+      setHorariosDisponiveis([...listaHorarios]);
+      console.log(horariosDisponiveis);
+    } else {
+      setHorariosDisponiveis([''])
+    }
   }, [])
 
-  function createWorkingTrack(timeSchedule, intervalTime) {
+  async function createWorkingTrack(timeSchedule, intervalTime, guardarHorariosOcupados) {
     timeSchedule = timeSchedule.split("-");
     var start = parseInt(timeSchedule[0], 10);
     var end = parseInt(timeSchedule[1], 10);
@@ -64,7 +75,7 @@ export default function ListaHorarios({ dadosMedico, selectedDate }) {
     }
     return workingTrack;
   }
-  
+
   return (
     <View>
       <View style={{ width: 315, height: 50, borderRadius: 12 }}>
