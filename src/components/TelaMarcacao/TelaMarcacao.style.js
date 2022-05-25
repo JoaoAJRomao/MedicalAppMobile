@@ -1,15 +1,13 @@
 import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
     content: {
-        alignItems: "center",
-        flex: 1,
+        flex: 2,
         margin: 8,
-        justifyContent: 'center',
         alignItems: "center",
     },
     titleText: {
         fontSize: 24,
-        marginLeft: 10
+        marginLeft: 10,
     },
     genericImage: {
         borderRadius: 130,
@@ -18,7 +16,9 @@ export default StyleSheet.create({
         margin: 10
     },
     organizerHeader: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingTop: 20,
+        paddingBottom: 20,
     },
     card: {
         width: 225,
@@ -34,8 +34,10 @@ export default StyleSheet.create({
         fontSize: 24,
     },
     contentShared: {
-        height: 350,
+        height: 390,
         width: 360,
+        paddingTop: 20,
+        paddingBottom: 20,
     },
     button: {
         width: 320,

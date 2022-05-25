@@ -25,9 +25,9 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
     <Background>
       <StatusBar style="light" backgroundColor="#000" translucent={false} />
       <Header hasReturn={true} />
-      <Text style={styles.titleText}>
-        Médico selecionado:
-      </Text>
+        <Text style={styles.titleText}>
+          Médico selecionado:
+        </Text>
       <View style={styles.content}>
         <View style={styles.organizerHeader}>
           <Image
@@ -46,7 +46,7 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
             <Stack.Screen name="calendario"
               children={() => <Calendario selectedDate={selectedDate} setSelectedDate={setSelectedDate} todayIs={todayIs} />} />
             <Stack.Screen name="horarios"
-              children={() => <ListaHorarios dadosMedico={dadosMedico} crm={dadosMedico.crm} selectedDate={selectedDate}/>} />
+              children={() => <ListaHorarios dadosMedico={dadosMedico} crm={dadosMedico.crm} selectedDate={selectedDate} />} />
           </Stack.Navigator>
         </View>
         <TouchableOpacity
