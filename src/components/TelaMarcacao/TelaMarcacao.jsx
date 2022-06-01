@@ -4,32 +4,21 @@ import styles from "./TelaMarcacao.style";
 import Header from '../Header/Header'
 import Background from '../Background/Background'
 import moment from "moment";
-import Calendario from "./Calendario/Calendario";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from "@react-navigation/native";
-import ListaHorarios from './ListaHorarios/ListaHorarios';
-import { brazilLanguage } from '../../util/LocalizacaoCalendario'
-import { Calendar, LocaleConfig } from 'react-native-calendars'
+import Calendario from './Calendario/Calendario';
 
 export default function MarcarConsultaMedico(medicoEscolhido) {
-  const Stack = createNativeStackNavigator();
   const todayIs = moment(new Date()).format("YYYY-MM-DD");
   const [dadosMedico, setDadosMedico] = useState([]);
   const [selectedDate, setSelectedDate] = useState(todayIs);
   const navigation = useNavigation()
-
-  LocaleConfig.locales['br'] = {
-    monthNames: brazilLanguage.monthNames,
-    monthNamesShort: brazilLanguage.dayNamesShort,
-    dayNames: brazilLanguage.dayNames,
-    dayNamesShort: brazilLanguage.dayNamesShort,
-    today: brazilLanguage.today
-  };
-  LocaleConfig.defaultLocale = 'br';
-  const mark = {
-    [selectedDate]: { selected: true, selectedColor: '#6EC84E' },
+  const data = {
+    crm: dadosMedico.crm,
+    marcacao: selectedDate,
+    horaInicio: dadosMedico.horarioAtendimentoInicial,
+    horaFim: dadosMedico.horarioAtendimentoFinal,
+    nomeMedico: dadosMedico.nomeMedico
   }
-
   useEffect(() => {
     const medicoParams = medicoEscolhido.route.params.post;
     setDadosMedico(medicoParams);
@@ -55,34 +44,16 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
             </Text>
           </View>
         </View>
-        {/* <View style={styles.contentShared}>
-          <Stack.Navigator screenOptions={{ headerShown: false }} >
-            <Stack.Screen name="calendario"
-              children={() => <Calendario selectedDate={selectedDate} setSelectedDate={setSelectedDate} todayIs={todayIs} />} />
-            <Stack.Screen name="horarios"
-              children={() => <ListaHorarios dadosMedico={dadosMedico} crm={dadosMedico.crm} selectedDate={selectedDate} />} />
-          </Stack.Navigator>
-        </View> */}
-        <Calendar
-          style={styles.calendar}
-          minDate={todayIs}
-          enableSwipeMonths={true}
-          disableAllTouchEventsForDisabledDays={true}
-          onDayPress={day => {
-            // console.log(day)
-            setSelectedDate(day.dateString);
-          }}
-          markedDates={mark}
-        />
+        <Calendario selectedDate={selectedDate} setSelectedDate={setSelectedDate} todayIs={todayIs} />
         <TouchableOpacity
           style={styles.button}
-        onPress={() => navigation.navigate('ListaHorarios')}
+          onPress={() => navigation.navigate({
+            name: 'ListaHorarios',
+            params: { post: data },
+            merge: true,
+          })}
         >
-          <Text
-            style={styles.textButton}
-          >
-            Escolher Data
-          </Text>
+          <Text style={styles.textButton} > Escolher Data </Text>
         </TouchableOpacity>
       </View>
     </Background>

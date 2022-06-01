@@ -7,13 +7,20 @@ import Background from './../../Background/Background';
 import Header from './../../Header/Header';
 import styles from "../TelaMarcacao.style";
 
-export default function ListaHorarios({ dadosMedico, selectedDate }) {
+// export default function ListaHorarios({ dadosMedico, selectedDate }) {
+export default function ListaHorarios(dados) {
   const [horariosDisponiveis, setHorariosDisponiveis] = useState([])
+  const [nomeMedico, setNomeMedico] = useState('')
 
   useEffect(async () => {
+    const crm = dados.route.params.post.crm;
+    const marcacao = dados.route.params.post.marcacao;
+    const inicioJornada = dados.route.params.post.horaInicio;
+    const terminoJornada = dados.route.params.post.horaFim;
+    setNomeMedico(dados.route.params.post.nomeMedico);
     const params = {
-      medicoAtual: dadosMedico.crm,
-      DataConsulta: moment(selectedDate).format('DD/MM/YYYY')
+      medicoAtual: crm,
+      DataConsulta: moment(marcacao).format('DD/MM/YYYY')
     }
     //*Busca consultas marcadas para o dia selecionado
     const res = await BuscarFilaPorMedicoeDataConsulta(params)
@@ -22,10 +29,10 @@ export default function ListaHorarios({ dadosMedico, selectedDate }) {
       res[0].data.forEach(e => {
         consultasMarcadas.push(e.horaConsulta)
       });
-      const listaHorarios = await CreateWorkingTrack(`${dadosMedico.horarioAtendimentoInicial}-${dadosMedico.horarioAtendimentoFinal}`, 20, consultasMarcadas);
+      const listaHorarios = await CreateWorkingTrack(`${inicioJornada}-${terminoJornada}`, 20, consultasMarcadas);
       setHorariosDisponiveis(adicionandoID(listaHorarios));
     } else {
-      const listaHorarios = await CreateWorkingTrack(`${dadosMedico.horarioAtendimentoInicial}-${dadosMedico.horarioAtendimentoFinal}`, 20, consultasMarcadas);
+      const listaHorarios = await CreateWorkingTrack(`${inicioJornada}-${terminoJornada}`, 20, consultasMarcadas);
       setHorariosDisponiveis(adicionandoID(listaHorarios));
     }
   }, [])
@@ -58,7 +65,7 @@ export default function ListaHorarios({ dadosMedico, selectedDate }) {
           <View
             style={styles.card}>
             <Text style={styles.textMedic}>
-              {dadosMedico?.nomeMedico}
+              {nomeMedico}
             </Text>
           </View>
         </View>
