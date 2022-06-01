@@ -32,7 +32,7 @@ export default function TelaConsulta() {
         await carregarLista(idCliente, tokenclient)
     }, [])
 
-    function something() {
+    function goTo() {
         navigation.navigate('exibirconsulta')
     }
 
@@ -116,14 +116,14 @@ export default function TelaConsulta() {
                         </View>
                     )}
                 />
-                <TouchableOpacity onPress={something} style={styles.scrollviewTouchable}>
+                <TouchableOpacity onPress={goTo} style={styles.scrollviewTouchable}>
                     <Image source={require('../../../assets/botaoAdicionar.png')}
                         style={styles.scrollviewImage}
                     />
                 </TouchableOpacity>
             </View>
             <View style={styles.footer}>
-                <TouchableOpacity onPress={something} style={styles.footerButton}>
+                <TouchableOpacity onPress={goTo} style={styles.footerButton}>
                     <Text> Perguntas </Text>
                 </TouchableOpacity>
             </View>

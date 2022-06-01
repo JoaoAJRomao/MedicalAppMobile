@@ -22,7 +22,7 @@ export default function Routes() {
         <Stack.Screen name="exibirconsulta" component={TelaPesquisaConsulta} />
         <Stack.Screen name="cadastro" component={CadastroCliente} />
         <Stack.Screen name="TelaMarcacao" component={TelaMarcacao} />
-        {/* <Stack.Screen name="ListaHorarios" component={ListaHorarios} /> */}
+        <Stack.Screen name="ListaHorarios" component={ListaHorarios} />
       </Stack.Navigator>
     </NavigationContainer>
   )

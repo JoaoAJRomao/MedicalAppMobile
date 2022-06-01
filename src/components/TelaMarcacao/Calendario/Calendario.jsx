@@ -16,16 +16,24 @@ export default function Calendario({ selectedDate, setSelectedDate, todayIs }) {
         [selectedDate]: { selected: true, selectedColor: '#6EC84E' },
     }
     return (
-        <Calendar
-            style={styles.calendar}
-            minDate={todayIs}
-            enableSwipeMonths={true}
-            disableAllTouchEventsForDisabledDays={true}
-            onDayPress={day => {
-                // console.log(day)
-                setSelectedDate(day.dateString);
-            }}
-            markedDates={mark}
-        />
+        <Background>
+            <StatusBar style="light" backgroundColor="#000" translucent={false} />
+            <Header hasReturn={true} />
+            <Text style={styles.titleText}>
+                Médico selecionado:
+            </Text>
+            <Calendar
+                style={styles.calendar}
+                minDate={todayIs}
+                enableSwipeMonths={true}
+                disableAllTouchEventsForDisabledDays={true}
+                onDayPress={day => {
+                    // console.log(day)
+                    setSelectedDate(day.dateString);
+                }}
+                markedDates={mark}
+            />
+
+        </Background>
     );
 }
