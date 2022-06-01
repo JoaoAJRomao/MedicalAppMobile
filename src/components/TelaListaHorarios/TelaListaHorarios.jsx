@@ -69,7 +69,9 @@ export default function ListaHorarios(dados) {
             </Text>
           </View>
         </View>
-
+        <Text style={styles.titleText}>
+          Escolha o horário
+        </Text>
         <View style={styles1.backgroundList}>
           <FlatList
             keyExtractor={(item) => item.id}
@@ -88,14 +90,8 @@ export default function ListaHorarios(dados) {
           />
         </View>
 
-        <TouchableOpacity
-          style={styles.button}
-        >
-          <Text
-            style={styles.textButton}
-          >
-            Escolher Hora
-          </Text>
+        <TouchableOpacity style={styles.button} >
+          <Text style={styles.textButton}> Escolher Hora </Text>
         </TouchableOpacity>
       </View>
     </Background>
