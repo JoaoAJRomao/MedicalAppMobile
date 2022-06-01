@@ -48,7 +48,7 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate({
-            name: 'ListaHorarios',
+            name: 'TelaListaHorarios',
             params: { post: data },
             merge: true,
           })}
