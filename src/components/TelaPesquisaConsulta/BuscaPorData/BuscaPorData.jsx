@@ -9,8 +9,8 @@ import ModalHorario from "./ModalHorario";
 export default function BuscaPorData() {
   const todayIs = moment(new Date()).format("YYYY-MM-DD");
   const [selectedDate, setSelectedDate] = useState(todayIs);
-  const [horaSelecionadaInicio, setHoraSelecionadaInicio] = useState("");
-  const [horaSelecionadaFim, setHoraSelecionadaFim] = useState("");
+  const [horaSelecionadaInicio, setHoraSelecionadaInicio] = useState("Hora Inicial");
+  const [horaSelecionadaFim, setHoraSelecionadaFim] = useState("Hora Final");
   const [modalInicioVisible, setModalInicioVisible] = useState(false);
   const [modalFimVisible, setmodalFimVisible] = useState(false);
   const [horariosFixo, setHorariosFixo] = useState(false);
@@ -32,6 +32,11 @@ export default function BuscaPorData() {
     [selectedDate]: { selected: true, selectedColor: "#38B6FF" },
   };
   const [date, setDate] = useState(new Date());
+
+  const TrazerMedicosFiltrados =() => {
+
+  }
+  
   return (
     <View>
       <Calendar
@@ -45,29 +50,37 @@ export default function BuscaPorData() {
       />
       <View
         flexDirection="row"
-        style={{ alignItems: "center", justifyContent: "center" }}
+        style={{ alignItems: "center", justifyContent: "center" ,margintop: 20 }}
       >
+          <Text style={{ fontSize: 16 }}> Defina horário: </Text>
         <View>
           <TouchableOpacity
             onPress={() => setModalInicioVisible(!modalInicioVisible)}
           >
-            <Text>Hora Inicial</Text>
+            <View style={{width: 100, height: 50, backgroundColor: "#38B6FF", alignItems: "center", justifyContent: "center", borderRadius: 10 }}>
+            <Text style={{fontSize: 16}}>{horaSelecionadaInicio}</Text>
+            </View>
           </TouchableOpacity>
         </View>
-        <View style={{ marginLeft: 20 }}>
+        <Text style={{ fontSize: 16 }}> até </Text>
+        <View style={{ marginLeft: 2,width: 100, height: 50, backgroundColor: "#38B6FF", alignItems: "center", justifyContent: "center", borderRadius: 10 }}>
           <TouchableOpacity onPress={() => setmodalFimVisible(!modalFimVisible)}>
-            <Text>Hora Inicial</Text>
+            <Text style={{fontSize: 16}}>{horaSelecionadaFim}</Text>
           </TouchableOpacity>
         </View>
       </View>
-
-      <View>
-        <TouchableOpacity>
-          <Text>Filtrar Data</Text>
+      <View style={{ marginTop: 30, alignItems: "center", justifyContent: "center",marginLeft: "auto", marginRight: "auto" ,width: 300, height: 50, backgroundColor: "#38B6FF", borderRadius: 10 }}>
+        <TouchableOpacity onPress={TrazerMedicosFiltrados}>
+          <Text style={{fontSize: 18}}>Filtrar Data</Text>
         </TouchableOpacity>
       </View>
+
       
-    <ModalHorario modalInicioVisible={modalInicioVisible} setModalInicioVisible={setModalInicioVisible} listaHorarios={horariosFixo}/>
+    <ModalHorario modalVisible={modalInicioVisible} setModalVisible={setModalInicioVisible} 
+    listaHorarios={horariosFixo} sethorarioRetornado={setHoraSelecionadaInicio}/>
+    
+    <ModalHorario modalVisible={modalFimVisible} setModalVisible={setmodalFimVisible} 
+    listaHorarios={horariosFixo} sethorarioRetornado={setHoraSelecionadaFim}/>
     </View>
   );
 }
