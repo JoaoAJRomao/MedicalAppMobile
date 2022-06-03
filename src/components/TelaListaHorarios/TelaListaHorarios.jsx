@@ -5,8 +5,7 @@ import { CreateWorkingTrack } from '../../util/WorkingTrackAssistant'
 import moment from 'moment'
 import Background from '../Background/Background';
 import Header from '../Header/Header';
-import styles from "../TelaMarcacao/TelaMarcacao.style";
-import styles1 from "./TelaListaHorarios.style"
+import styles from "./TelaListaHorarios.style"
 
 export default function ListaHorarios(dados) {
   const [horariosDisponiveis, setHorariosDisponiveis] = useState([])
@@ -72,16 +71,16 @@ export default function ListaHorarios(dados) {
         <Text style={styles.titleText}>
           Escolha o horário
         </Text>
-        <View style={styles1.backgroundList}>
+        <View style={styles.backgroundList}>
           <FlatList
             keyExtractor={(item) => item.id}
             data={horariosDisponiveis}
             renderItem={(item) =>
-              <View style={styles1.backgroundTime}
+              <View style={styles.backgroundTime}
               >
                 <TouchableOpacity
                   onPress={() => console.log(item)}
-                  style={styles1.button}
+                  style={styles.button}
                 >
                   <Text style={{ fontSize: 24 }}>{item.item.horario}</Text>
                 </TouchableOpacity>
@@ -90,9 +89,14 @@ export default function ListaHorarios(dados) {
           />
         </View>
 
-        <TouchableOpacity style={styles.button} >
-          <Text style={styles.textButton}> Escolher Hora </Text>
-        </TouchableOpacity>
+        <View style={styles.footer} >
+          <TouchableOpacity style={styles.footerDeclineButton} >
+            <Text style={{ fontSize: 24, }} > Cancelar </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.footerAcceptButton} >
+            <Text style={{ fontSize: 24, }} > Confirmar </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </Background>
   )
