@@ -75,6 +75,7 @@ export default function ListaHorarios(dados) {
           <FlatList
             keyExtractor={(item) => item.id}
             data={horariosDisponiveis}
+            showsVerticalScrollIndicator ={false}
             renderItem={(item) =>
               <View style={styles.backgroundTime}
               >
