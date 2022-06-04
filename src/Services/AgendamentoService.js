@@ -137,3 +137,21 @@ export async function ConsultaPorCRM(params) {
 
   return estrutura
 }
+
+export async function ConsultaPorFiltroData(params) {
+  const estrutura = []
+
+  const tokenclient = await AsyncStorage.getItem("TOKEN")
+  await api.post(`/Consulta/GetFilterDate`, params, {
+    headers: {
+      Authorization: `Bearer ${tokenclient}`
+    }
+  })
+    .then((res) => {
+      estrutura.push(res.data.data)
+    }).catch((err) => {
+      estrutura.push(err.data.data)
+    });
+
+  return estrutura
+}
