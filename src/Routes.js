@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TelaPesquisaConsulta from './components/TelaPesquisaConsulta/TelaPesquisaConsulta';
 import TelaMarcacao from './components/TelaMarcacao/TelaMarcacao';
 import TelaListaHorarios from './components/TelaListaHorarios/TelaListaHorarios';
+import MedicosFiltrados from './components/TelaPesquisaConsulta/BuscaPorData/MedicosFiltrados';
 
 
 export default function Routes() {
@@ -23,6 +24,7 @@ export default function Routes() {
         <Stack.Screen name="cadastro" component={CadastroCliente} />
         <Stack.Screen name="TelaMarcacao" component={TelaMarcacao} />
         <Stack.Screen name="TelaListaHorarios" component={TelaListaHorarios} />
+        <Stack.Screen name="MedicosFiltrados" component={MedicosFiltrados} />
       </Stack.Navigator>
     </NavigationContainer>
   )

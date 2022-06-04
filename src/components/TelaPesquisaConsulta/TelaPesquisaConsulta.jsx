@@ -18,7 +18,8 @@ export default function TelaPesquisaConsulta() {
       <Tab.Navigator>
         <Tab.Screen name="Busca por médico"
           children={() => <BuscaPorMedico specialty={specialty} />} />
-        <Tab.Screen name="Busca por data" component={BuscaPorData} />
+        <Tab.Screen name="Busca por data" 
+         children={() => <BuscaPorData specialty={specialty} />} />
       </Tab.Navigator>
     </Background>
   );
