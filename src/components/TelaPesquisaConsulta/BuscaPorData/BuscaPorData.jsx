@@ -42,7 +42,7 @@ export default function BuscaPorData({ specialty }) {
     const horarioFiltro = {
       HoraInicial: '08:00'  /*horaSelecionadaInicio*/,
       HoraFim: '17:00' /*horaSelecionadaFim*/,
-       Data: '27/06/2022' /*dataBrasileira*/ ,
+      Data: '27/06/2022' /*dataBrasileira*/ ,
     };
     const consultasDoFiltro = await ConsultaPorFiltroData(horarioFiltro);
     const listaConsultaPorEspecialidade = consultasDoFiltro[0]?.filter(
@@ -50,7 +50,9 @@ export default function BuscaPorData({ specialty }) {
     );
       navigation.navigate({
        name: 'MedicosFiltrados',
-       params: { post: listaConsultaPorEspecialidade },
+       params: {listaConsulta: listaConsultaPorEspecialidade, 
+            horarioRange: '08:00-17:00' //`${horaSelecionadaInicio}-${horaSelecionadaFim}`
+      },
        merge: true
      })
   };
