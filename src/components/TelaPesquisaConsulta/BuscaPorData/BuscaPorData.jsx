@@ -12,8 +12,7 @@ export default function BuscaPorData({ specialty }) {
   const navigation = useNavigation()
   const todayIs = moment(new Date()).format("YYYY-MM-DD");
   const [selectedDate, setSelectedDate] = useState(todayIs);
-  const [horaSelecionadaInicio, setHoraSelecionadaInicio] =
-    useState("Hora Inicial");
+  const [horaSelecionadaInicio, setHoraSelecionadaInicio] = useState("Hora Inicial");
   const [horaSelecionadaFim, setHoraSelecionadaFim] = useState("Hora Final");
   const [modalInicioVisible, setModalInicioVisible] = useState(false);
   const [modalFimVisible, setmodalFimVisible] = useState(false);
@@ -42,21 +41,21 @@ export default function BuscaPorData({ specialty }) {
     const horarioFiltro = {
       HoraInicial: '08:00'  /*horaSelecionadaInicio*/,
       HoraFim: '17:00' /*horaSelecionadaFim*/,
-       Data: '27/06/2022' /*dataBrasileira*/ ,
+      Data: '27/06/2022' /*dataBrasileira*/,
     };
     const consultasDoFiltro = await ConsultaPorFiltroData(horarioFiltro);
     const listaConsultaPorEspecialidade = consultasDoFiltro[0]?.filter(
       (item) => item.codigoEspecialidade === specialty
     );
-      navigation.navigate({
-       name: 'MedicosFiltrados',
-       params: { post: listaConsultaPorEspecialidade },
-       merge: true
-     })
+    navigation.navigate({
+      name: 'MedicosFiltrados',
+      params: { post: listaConsultaPorEspecialidade },
+      merge: true
+    })
   };
 
   return (
-    <ScrollView style={{flex: 1}}>
+    <ScrollView style={{ flex: 1 }}>
       <Calendar
         minDate={todayIs}
         enableSwipeMonths={true}
@@ -73,7 +72,7 @@ export default function BuscaPorData({ specialty }) {
           sethorarioRetornado={setHoraSelecionadaInicio}
           tipo="Inicio"
         />
-        <View style={{ marginLeft: 30}}>
+        <View style={{ marginLeft: 30 }}>
           <ViewHorariosFiltro
             listaHorarios={horariosFixo}
             sethorarioRetornado={setHoraSelecionadaFim} tipo="Final"
