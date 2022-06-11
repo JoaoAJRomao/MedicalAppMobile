@@ -47,11 +47,13 @@ export default function BuscaPorData({ specialty }) {
     const listaConsultaPorEspecialidade = consultasDoFiltro[0]?.filter(
       (item) => item.codigoEspecialidade === specialty
     );
-    navigation.navigate({
-      name: 'MedicosFiltrados',
-      params: { post: listaConsultaPorEspecialidade },
-      merge: true
-    })
+      navigation.navigate({
+       name: 'MedicosFiltrados',
+       params: {listaConsulta: listaConsultaPorEspecialidade, 
+            horarioRange: '08:00-17:00' //`${horaSelecionadaInicio}-${horaSelecionadaFim}`
+      },
+       merge: true
+     })
   };
 
   return (

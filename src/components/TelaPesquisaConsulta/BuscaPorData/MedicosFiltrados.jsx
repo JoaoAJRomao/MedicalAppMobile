@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, FlatList, TouchableOpacity, Image } from "react-native";
+import { CreateWorkingTrack } from "../../../util/WorkingTrackAssistant";
 import styles from "../BuscaPorMedico/BuscaPorMedico.style";
 
-export default function MedicosFiltrados({dados}) {
+export default function MedicosFiltrados(dados) {
 
-const [medicos, setMedicos] = useState(dados)
+useEffect(async () =>{
+  let consultasMarcadas = [];
+   console.log(dados)
+   dados?.route?.params.listaConsulta.forEach(e => {
+    consultasMarcadas.push(e.horaConsulta)
+  });
+   const horariosDisponiveis = await CreateWorkingTrack( dados?.route?.params.horarioRange, 20, consultasMarcadas);
 
-useEffect(() =>{
-   console.log(medicos)
+   console.log(horariosDisponiveis)
+
 },[])
 
   return (
     <View style={styles.mainView}>
       <FlatList
         keyExtractor={(item) => item.crm}
-        data={medicos}
+        data={dados?.route?.params}
         renderItem={({ item }) => (
           <View style={styles.box}>
             <Image
