@@ -8,7 +8,7 @@ import {
 import { BuscarTodasEspecialidades } from "../../../Services/AgendamentoService";
 import styles from './Carousel.style'
 
-export default function Carrousel({ setSpecialty }) {
+export default function Carrousel({ setSpecialty, setSpecialtyName }) {
   const [carousel, setcarousel] = useState([]);
   const [especialidadeEscolhida, setEspecialidadeEscolhida] = useState(0);
 
@@ -17,9 +17,10 @@ export default function Carrousel({ setSpecialty }) {
     setcarousel(especialidades[0]);
   }, []);
 
-  const buscarMedico = async (codigoEspecialidade) => {
+  const buscarMedico = async (codigoEspecialidade, nomeEspecialidade) => {
     setEspecialidadeEscolhida(codigoEspecialidade);
     setSpecialty(codigoEspecialidade)
+    setSpecialtyName(nomeEspecialidade);
   };
 
   return (
@@ -33,7 +34,7 @@ export default function Carrousel({ setSpecialty }) {
           extraData={especialidadeEscolhida}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => buscarMedico(item.codigoEspecialidade)}
+              onPress={() => buscarMedico(item.codigoEspecialidade, item.nomeEspecialidade)}
               style={styles.item}
             >
               <Text style={[styles.title, item.codigoEspecialidade == especialidadeEscolhida ? styles.titleSelected : styles.title]}>{item?.nomeEspecialidade}</Text>

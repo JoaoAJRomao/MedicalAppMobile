@@ -6,10 +6,19 @@ import moment from 'moment'
 import Background from '../Background/Background';
 import Header from '../Header/Header';
 import styles from "./TelaListaHorarios.style"
+import { useNavigation } from "@react-navigation/native";
 
 export default function ListaHorarios(dados) {
   const [horariosDisponiveis, setHorariosDisponiveis] = useState([])
   const [nomeMedico, setNomeMedico] = useState('')
+  const [horarioEscolhido, setHorarioEscolhido] = useState('');
+  const navigation = useNavigation()
+  const data = {
+    nomeMedico: nomeMedico,
+    dataMarcada: dados.route.params.post.marcacao,
+    horarioEscolhido: horarioEscolhido,
+    nomeEspecialidade: dados.route.params.post.nomeEspecialidade,
+  }
 
   useEffect(async () => {
     const crm = dados.route.params.post.crm;
@@ -75,12 +84,12 @@ export default function ListaHorarios(dados) {
           <FlatList
             keyExtractor={(item) => item.id}
             data={horariosDisponiveis}
-            showsVerticalScrollIndicator ={false}
+            showsVerticalScrollIndicator={false}
             renderItem={(item) =>
               <View style={styles.backgroundTime}
               >
                 <TouchableOpacity
-                  onPress={() => console.log(item)}
+                  onPress={() => setHorarioEscolhido(item.horario)}
                   style={styles.button}
                 >
                   <Text style={{ fontSize: 24 }}>{item.item.horario}</Text>
@@ -91,14 +100,43 @@ export default function ListaHorarios(dados) {
         </View>
 
         <View style={styles.footer} >
-          <TouchableOpacity style={styles.footerDeclineButton} >
-            <Text style={{ fontSize: 24, }} > Cancelar </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerAcceptButton} >
-            <Text style={{ fontSize: 24, }} > Confirmar </Text>
-          </TouchableOpacity>
+          { horarioEscolhido === '' ? <SelecioneHorario /> : <HorarioJaSelecionado data={data} /> }
         </View>
       </View>
-    </Background>
+    </Background >
+  )
+}
+
+const SelecioneHorario = () => {
+  return (
+    <TouchableOpacity
+      style={{
+        backgroundColor: '#38B6FF',
+        borderRadius: 12,
+        width: '100%',
+        height: '70%',
+      }}
+    >
+      <Text style={{ fontSize: 24, }}>Escolha o horario</Text>
+    </TouchableOpacity>
+  )
+}
+
+const HorarioJaSelecionado = (data) => {
+  const navigation = useNavigation()
+  return (
+    <>
+      <TouchableOpacity style={styles.footerDeclineButton}>
+        <Text style={{ fontSize: 24, }}> Cancelar </Text>
+      </TouchableOpacity><TouchableOpacity style={styles.footerAcceptButton}
+        onPress={() => navigation.navigate({
+          name: 'ConfirmacaoAgendamento',
+          params: { post: data },
+          merge: true,
+        })}
+      >
+        <Text style={{ fontSize: 24, }}> Confirmar </Text>
+      </TouchableOpacity>
+    </>
   )
 }

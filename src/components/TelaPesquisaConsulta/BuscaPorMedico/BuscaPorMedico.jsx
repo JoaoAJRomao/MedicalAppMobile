@@ -10,7 +10,7 @@ import {
 import { BuscarDoutorPorEspecialidade } from "../../../Services/AgendamentoService";
 import styles from './BuscaPorMedico.style'
 
-export default function BuscaPorMedico({ specialty }) {
+export default function BuscaPorMedico({ specialty, specialtyName }) {
     const navigation = useNavigation()
     const [carouselMedicos, setCarouselMedicos] = useState([]);
 
@@ -34,7 +34,7 @@ export default function BuscaPorMedico({ specialty }) {
                         <TouchableOpacity
                             onPress={() => navigation.navigate({
                                 name: 'TelaMarcacao',
-                                params: { post: item },
+                                params: { post: item, specialtyName: specialtyName },
                                 merge: true,
                             })}
                             style={{ width: 250, height: 50, marginVertical: 15, marginLeft: 10, backgroundColor: "#FFFF", justifyContent: 'center', borderRadius: 10 }}

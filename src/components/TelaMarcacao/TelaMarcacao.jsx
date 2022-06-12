@@ -17,7 +17,8 @@ export default function MarcarConsultaMedico(medicoEscolhido) {
     marcacao: selectedDate,
     horaInicio: dadosMedico.horarioAtendimentoInicial,
     horaFim: dadosMedico.horarioAtendimentoFinal,
-    nomeMedico: dadosMedico.nomeMedico
+    nomeMedico: dadosMedico.nomeMedico,
+    nomeEspecialidade: medicoEscolhido.route.params.specialtyName,
   }
   useEffect(() => {
     const medicoParams = medicoEscolhido.route.params.post;
