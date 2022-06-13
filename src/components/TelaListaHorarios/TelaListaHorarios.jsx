@@ -89,7 +89,7 @@ export default function ListaHorarios(dados) {
               <View style={styles.backgroundTime}
               >
                 <TouchableOpacity
-                  onPress={() => setHorarioEscolhido(item.horario)}
+                  onPress={() => setHorarioEscolhido(item.item.horario)}
                   style={styles.button}
                 >
                   <Text style={{ fontSize: 24 }}>{item.item.horario}</Text>

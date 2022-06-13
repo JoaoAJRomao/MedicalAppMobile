@@ -12,10 +12,10 @@ export default function ListaHorarios(dados) {
   const [nomeEspecialidade, setNomeEspecialidade] = useState('');
 
   useEffect(async () => {
-    setNomeMedico(dados.route.params.post.nomeMedico);
-    setDataEscolhida(moment(dados.route.params.post.dataMarcada).format('DD/MM/YYYY'));
-    setHorarioEscolhido(dados.route.params.post.horarioEscolhido);
-    setNomeEspecialidade(dados.route.params.post.nomeEspecialidade);
+    setNomeMedico(dados.route.params.post.data.nomeMedico);
+    setDataEscolhida(moment(dados.route.params.post.data.dataMarcada).format('DD/MM/YYYY'));
+    setHorarioEscolhido(dados.route.params.post.data.horarioEscolhido);
+    setNomeEspecialidade(dados.route.params.post.data.nomeEspecialidade);
   }, [])
 
   return (
