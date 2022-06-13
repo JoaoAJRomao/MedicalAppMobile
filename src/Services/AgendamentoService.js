@@ -93,13 +93,6 @@ export async function DeletarConsultaPorId(params) {
         estrutura.push(err.data.data)
       });
 
-  await api.delete(`/Consulta/deleteQueryById?IdClient=${params.key}`,)
-    .then((res) => {
-      estrutura.push(res.data.data)
-    }).catch((err) => {
-      estrutura.push(err.data.data)
-    });
-
   return estrutura
 }
 

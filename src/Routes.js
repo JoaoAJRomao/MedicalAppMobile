@@ -9,6 +9,7 @@ import TelaMarcacao from './components/TelaMarcacao/TelaMarcacao';
 import TelaListaHorarios from './components/TelaListaHorarios/TelaListaHorarios';
 import MedicosFiltrados from './components/TelaPesquisaConsulta/BuscaPorData/MedicosFiltrados';
 import ConfirmacaoAgendamento from './components/TelaConfirmacaoAgendamento/TelaConfirmacaoAgendamento.jsx';
+import ListaHorariosFiltro from './components/TelaPesquisaConsulta/BuscaPorData/ListaHorariosFiltro';
 
 
 export default function Routes() {
@@ -27,6 +28,7 @@ export default function Routes() {
         <Stack.Screen name="TelaListaHorarios" component={TelaListaHorarios} />
         <Stack.Screen name="MedicosFiltrados" component={MedicosFiltrados} />
         <Stack.Screen name="ConfirmacaoAgendamento" component={ConfirmacaoAgendamento} />
+        <Stack.Screen name="ListaHorariosFiltro" component={ListaHorariosFiltro} />
       </Stack.Navigator>
     </NavigationContainer>
   )
