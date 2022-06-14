@@ -19,7 +19,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         paddingTop: 20,
         paddingBottom: 20,
-    },    
+    },
     card: {
         width: 225,
         height: 70,
@@ -30,33 +30,25 @@ export default StyleSheet.create({
         borderRadius: 10,
         alignItems: "center"
     },
-    textMedic: {
+    cardConfirmacao: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 12,
+        width: '90%',
+        height: 123,
+        justifyContent: 'center',
+        padding: 16
+    },
+    text: {
         fontSize: 24,
     },
-    backgroundList: {
-        flex: 1,
+    backgroundMensagem: {
+        backgroundColor: '#777777',
         borderRadius: 12,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#FFFFFF',
         width: '90%',
-    },
-    backgroundTime: {
-        height: 50,
-        backgroundColor: '#DDD',
-        margin: 7,
-        borderRadius: 10,
+        justifyContent: 'space-between',
         alignItems: 'center',
-        justifyContent: 'center',
-    },
-    button: {
-        width: 250,
-        height: 50,
-        marginVertical: 15,
-        marginLeft: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10
+        margin: 20,
+        paddingVertical: 10,
     },
     footer: {
         flexDirection: 'row',
@@ -65,6 +57,11 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         margin: 10,
         alignItems: 'center',
+        position: 'absolute',
+        bottom: 10,
+        left: 0,
+        right: 0,
+        padding: 20,
     },
     footerDeclineButton: {
         backgroundColor: '#EC2D2D',
@@ -80,6 +77,6 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 48,
-        width: 130,
+        width: 140,
     },
 });

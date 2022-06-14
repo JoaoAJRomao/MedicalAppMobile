@@ -71,27 +71,36 @@ export async function BuscarTodasEspecialidades() {
 export async function CriarNovaConsulta(params) {
   const estrutura = []
 
-  await api.post(`/consulta/CreateNewQuery`, params)
+  const tokenclient = await AsyncStorage.getItem("TOKEN")
+  await api.post(`/consulta/CreateNewQuery`, params, {
+    headers: {
+      Authorization: `Bearer ${tokenclient}`
+    }
+  })
     .then((res) => {
-      estrutura.push(res.data.data)
+      estrutura.push(res)
+      console.log(res)
     }).catch((err) => {
-      estrutura.push(err.data.data)
+      estrutura.push(err)
+      console.log(err)
     });
 
   return estrutura
 }
 
 export async function DeletarConsultaPorId(params) {
-    const estrutura = []
-    const tokenclient = await AsyncStorage.getItem("TOKEN")
-    await api.delete(`/Consulta/deleteQueryById?IdClient=${params}`, {headers: {
+  const estrutura = []
+  const tokenclient = await AsyncStorage.getItem("TOKEN")
+  await api.delete(`/Consulta/deleteQueryById?IdClient=${params}`, {
+    headers: {
       Authorization: `Bearer ${tokenclient}`
-      }})
-      .then((res) => {
-        estrutura.push(res.data.data)
-      }).catch((err) => {
-        estrutura.push(err.data.data)
-      });
+    }
+  })
+    .then((res) => {
+      estrutura.push(res.data.data)
+    }).catch((err) => {
+      estrutura.push(err.data.data)
+    });
 
   return estrutura
 }

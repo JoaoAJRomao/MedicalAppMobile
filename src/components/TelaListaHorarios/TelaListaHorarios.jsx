@@ -14,10 +14,12 @@ export default function ListaHorarios(dados) {
   const [horarioEscolhido, setHorarioEscolhido] = useState('');
   const navigation = useNavigation()
   const data = {
+    crm: dados.route.params.post.crm,
     nomeMedico: nomeMedico,
     dataMarcada: dados.route.params.post.marcacao,
     horarioEscolhido: horarioEscolhido,
     nomeEspecialidade: dados.route.params.post.nomeEspecialidade,
+    especialidadeId: dados.route.params.post.especialidadeId
   }
 
   useEffect(async () => {
@@ -89,8 +91,8 @@ export default function ListaHorarios(dados) {
               <View style={styles.backgroundTime}
               >
                 <TouchableOpacity
-                  onPress={() => setHorarioEscolhido(item.item.horario)}
                   style={styles.button}
+                  onPress={() => setHorarioEscolhido(item.item.horario)}
                 >
                   <Text style={{ fontSize: 24 }}>{item.item.horario}</Text>
                 </TouchableOpacity>
