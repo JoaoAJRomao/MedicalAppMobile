@@ -13,10 +13,11 @@ export default function ListaHorarios(dados) {
   const [nomeMedico, setNomeMedico] = useState('')
   const [horarioEscolhido, setHorarioEscolhido] = useState('');
   const [selectedId, setSelectedId] = useState(null);
+  const dataMarcada =dados.route.params.post.marcacao.split("-").reverse().join("/");
   const data = {
     crm: dados.route.params.post.crm,
     nomeMedico: nomeMedico,
-    dataMarcada: dados.route.params.post.marcacao,
+    dataMarcada: dataMarcada,
     horarioEscolhido: horarioEscolhido,
     nomeEspecialidade: dados.route.params.post.nomeEspecialidade,
     especialidadeId: dados.route.params.post.especialidadeId
