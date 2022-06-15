@@ -88,10 +88,7 @@ export default function ListaHorarios(dados) {
             data={horariosDisponiveis}
             extraData={selectedId}
             showsVerticalScrollIndicator={false}
-
-
             renderItem={(item) =>
-              // <View style={styles.backgroundTime}
               <View style={[item.item.id === selectedId ? styles.backgroundTimeSelected : styles.backgroundTime]}
               >
                 <TouchableOpacity
@@ -105,11 +102,8 @@ export default function ListaHorarios(dados) {
                 </TouchableOpacity>
               </View>
             }
-
-
           />
         </View>
-
         <View style={styles.footer} >
           {horarioEscolhido === '' ? <SelecioneHorario /> : <HorarioJaSelecionado data={data} />}
         </View>
