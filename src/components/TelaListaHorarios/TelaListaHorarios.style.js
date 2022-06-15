@@ -51,7 +51,7 @@ export default StyleSheet.create({
     },
     backgroundTimeSelected: {
         height: 50,
-        backgroundColor: '#00FF7F',
+        backgroundColor: '#38B6FF',
         margin: 7,
         borderRadius: 10,
         alignItems: 'center',
