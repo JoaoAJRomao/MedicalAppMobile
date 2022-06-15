@@ -39,7 +39,7 @@ export default StyleSheet.create({
         padding: 16
     },
     text: {
-        fontSize: 24,
+        fontSize: 20,
     },
     backgroundMensagem: {
         backgroundColor: '#777777',
@@ -53,9 +53,8 @@ export default StyleSheet.create({
     footer: {
         flexDirection: 'row',
         height: '10%',
-        width: '90%',
+        width: '100%',
         justifyContent: 'space-between',
-        margin: 10,
         alignItems: 'center',
         position: 'absolute',
         bottom: 10,
@@ -78,5 +77,14 @@ export default StyleSheet.create({
         alignItems: 'center',
         height: 48,
         width: 140,
+    },
+    footerGoHomeButton: {
+        backgroundColor: '#38B6FF',
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 48,
+        width: '100%',
+        flexDirection: 'row'
     },
 });

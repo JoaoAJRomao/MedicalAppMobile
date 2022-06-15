@@ -6,6 +6,7 @@ import styles from './TelaConfirmacaoAgendamento.style';
 import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CriarNovaConsulta } from '../../Services/AgendamentoService';
+import { useNavigation } from "@react-navigation/native";
 
 export default function ListaHorarios(dados) {
   const [nomeMedico, setNomeMedico] = useState('Nome medico');
@@ -14,6 +15,8 @@ export default function ListaHorarios(dados) {
   const [nomeEspecialidade, setNomeEspecialidade] = useState('');
   const [crmMedico, setCrmMedico] = useState('');
   const [especialidadeId, setEspecialidadeId] = useState('');
+  const [sucesso, setSucesso] = useState(false);
+  const navigation = useNavigation()
 
   useEffect(async () => {
     setNomeMedico(dados.route.params.post.data.nomeMedico);
@@ -36,6 +39,7 @@ export default function ListaHorarios(dados) {
     const res = await CriarNovaConsulta(params);
     console.log(res);
     if (res[0].data.success) {
+      setSucesso(true);
       return Alert.alert(res[0].data?.message);
     }
     if (res[0].response.data.success === false) {
@@ -85,18 +89,49 @@ export default function ListaHorarios(dados) {
           </View>
         </View>
 
+        <View>
+          <Text>A consulta acima foi confirmada e pode ser encontrada na sua tela inicial!</Text>
+        </View>
 
         <View style={styles.footer} >
-          <TouchableOpacity style={styles.footerDeclineButton} >
-            <Text style={styles.text} > Cancelar </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerAcceptButton}
-            onPress={() => confirmaAgendamento()}
-          >
-            <Text style={styles.text} > Confirmar </Text>
-          </TouchableOpacity>
+          {sucesso ? <TelaConsultaButton /> : <RealizarRequisicaoOuCancelar confirmaAgendamento={confirmaAgendamento} />}
         </View>
       </View>
     </Background>
+  )
+}
+
+const RealizarRequisicaoOuCancelar = ({ confirmaAgendamento }) => {
+  return (
+    <>
+      <TouchableOpacity style={styles.footerDeclineButton} >
+        <Text style={styles.text} > Cancelar </Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.footerAcceptButton}
+        onPress={() => confirmaAgendamento()}
+      >
+        <Text style={styles.text} > Confirmar </Text>
+      </TouchableOpacity>
+    </>
+  )
+}
+
+const TelaConsultaButton = () => {
+  const navigation = useNavigation()
+  return (
+    <TouchableOpacity
+      style={styles.footerGoHomeButton}
+      onPress={() => navigation.navigate({
+        name: 'consulta',
+        merge: true,
+      })}
+    >
+      <Text style={styles.text} > Tela Inicial </Text>
+      <Image
+        source={require('../../../assets/GoHomeIcon.png')}
+        style={{ width: 30, height: 30, alignContent: 'stretch' }}
+        resizeMode="contain"
+      />
+    </TouchableOpacity>
   )
 }

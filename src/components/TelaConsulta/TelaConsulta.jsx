@@ -36,19 +36,18 @@ export default function TelaConsulta() {
         navigation.navigate('exibirconsulta')
     }
 
-   function verificarDataConsulta(data, hora){
-    var dateAgora = new Date().toLocaleString();
-    const dateConsulta = (data +' '+hora+':00').split('/').reverse().join('-')
-    var dateAgoraConvertida = new Date(dateAgora)
-    const dataconvertida = new Date(dateConsulta)
-    
-    if(dateAgoraConvertida >= dataconvertida)
-    {
-        return require("@expo/../../assets/verde.png")
-    }else{
-        return require("@expo/../../assets/vermelho.png")
+    function verificarDataConsulta(data, hora) {
+        var dateAgora = new Date().toLocaleString();
+        const dateConsulta = (data + ' ' + hora + ':00').split('/').reverse().join('-')
+        var dateAgoraConvertida = new Date(dateAgora)
+        const dataconvertida = new Date(dateConsulta)
+
+        if (dateAgoraConvertida >= dataconvertida) {
+            return require("@expo/../../assets/verde.png")
+        } else {
+            return require("@expo/../../assets/vermelho.png")
+        }
     }
-   }
 
     async function carregarLista(idCliente, tokenclient) {
         const params = {
@@ -59,27 +58,27 @@ export default function TelaConsulta() {
         setConsulta(res[0])
     }
 
-    
-
-    const clickConsulta =(dados)=> {
-            console.log(dados)
-            Alert.alert(
-                'Cancelamento de Consulta', 
-                'Deseja cancelar a consulta ?',
-                [
-                  { text: 'Sim', 
-                  onPress: async () => {
-                      await DeletarConsultaPorId(dados.codigoConsulta)
-                      setConsulta(consulta.filter(item => item.codigoConsulta !== dados.codigoConsulta))
-                    }},
-                  {
+    const clickConsulta = (dados) => {
+        console.log(dados)
+        Alert.alert(
+            'Cancelamento de Consulta',
+            'Deseja cancelar a consulta ?',
+            [
+                {
+                    text: 'Sim',
+                    onPress: async () => {
+                        await DeletarConsultaPorId(dados.codigoConsulta)
+                        setConsulta(consulta.filter(item => item.codigoConsulta !== dados.codigoConsulta))
+                    }
+                },
+                {
                     text: 'Não',
                     onPress: () => console.log('Não Cancelou'),
                     style: 'cancel',
-                  },
-                ],
-                { cancelable: false }
-              );
+                },
+            ],
+            { cancelable: false }
+        );
     }
 
     const cancelarConsulta = async (codigoConsulta) => {
@@ -98,20 +97,20 @@ export default function TelaConsulta() {
                     renderItem={({ item }) => (
                         <View style={styles.box}>
                             <View style={styles.groupItem}>
-                            <TouchableOpacity onPress={()=> clickConsulta(item)}>
-                                <View style={styles.item}>
-                                    <Text style={styles.itemText}>{item.dataConsulta}</Text>
-                                    <Text style={styles.itemText}>{item.horaConsulta}</Text>
-                                </View>
-                                <View style={styles.itemTextMedic}>
-                                    <Text style={styles.itemText}>{item.nomeMedico}</Text> 
-                                    <Image style={{justifyContent: 'space-between', marginLeft: 10}} source={verificarDataConsulta(item.dataConsulta, item.horaConsulta)} />                                   
-                                </View>
-                                <View style={styles.item}>
-                                    <Text style={styles.itemText}>Consulta</Text>
-                                    <Text style={styles.itemText}>{item.nomeEspecialidade}</Text>
-                                </View>
-                            </TouchableOpacity>
+                                <TouchableOpacity onPress={() => clickConsulta(item)}>
+                                    <View style={styles.item}>
+                                        <Text style={styles.itemText}>{item.dataConsulta}</Text>
+                                        <Text style={styles.itemText}>{item.horaConsulta}</Text>
+                                    </View>
+                                    <View style={styles.itemTextMedic}>
+                                        <Text style={styles.itemText}>{item.nomeMedico}</Text>
+                                        <Image style={{ justifyContent: 'space-between', marginLeft: 10 }} source={verificarDataConsulta(item.dataConsulta, item.horaConsulta)} />
+                                    </View>
+                                    <View style={styles.item}>
+                                        <Text style={styles.itemText}>Consulta</Text>
+                                        <Text style={styles.itemText}>{item.nomeEspecialidade}</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     )}
