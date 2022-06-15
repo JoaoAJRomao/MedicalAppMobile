@@ -12,7 +12,7 @@ export default function ListaHorarios(dados) {
   const [horariosDisponiveis, setHorariosDisponiveis] = useState([])
   const [nomeMedico, setNomeMedico] = useState('')
   const [horarioEscolhido, setHorarioEscolhido] = useState('');
-  const navigation = useNavigation()
+  const [selectedId, setSelectedId] = useState(null);
   const data = {
     crm: dados.route.params.post.crm,
     nomeMedico: nomeMedico,
@@ -86,23 +86,32 @@ export default function ListaHorarios(dados) {
           <FlatList
             keyExtractor={(item) => item.id}
             data={horariosDisponiveis}
+            extraData={selectedId}
             showsVerticalScrollIndicator={false}
+
+
             renderItem={(item) =>
-              <View style={styles.backgroundTime}
+              // <View style={styles.backgroundTime}
+              <View style={[item.item.id === selectedId ? styles.backgroundTimeSelected : styles.backgroundTime]}
               >
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={() => setHorarioEscolhido(item.item.horario)}
+                  onPress={() => {
+                    setHorarioEscolhido(item.item.horario)
+                    setSelectedId(item.item.id);
+                  }}
                 >
                   <Text style={{ fontSize: 24 }}>{item.item.horario}</Text>
                 </TouchableOpacity>
               </View>
             }
+
+
           />
         </View>
 
         <View style={styles.footer} >
-          { horarioEscolhido === '' ? <SelecioneHorario /> : <HorarioJaSelecionado data={data} /> }
+          {horarioEscolhido === '' ? <SelecioneHorario /> : <HorarioJaSelecionado data={data} />}
         </View>
       </View>
     </Background >
@@ -117,9 +126,10 @@ const SelecioneHorario = () => {
         borderRadius: 12,
         width: '100%',
         height: '70%',
+        justifyContent: 'center',
       }}
     >
-      <Text style={{ fontSize: 24, }}>Escolha o horario</Text>
+      <Text style={{ fontSize: 24, textAlign: 'center', }}>Escolha o horario</Text>
     </TouchableOpacity>
   )
 }
