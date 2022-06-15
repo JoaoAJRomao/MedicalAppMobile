@@ -20,7 +20,7 @@ export default function ListaHorarios(dados) {
 
   useEffect(async () => {
     setNomeMedico(dados.route.params.post.data.nomeMedico);
-    setDataEscolhida(moment(dados.route.params.post.data.dataMarcada).format('DD/MM/YYYY'));
+    setDataEscolhida(dados.route.params.post.data.dataMarcada);
     setHorarioEscolhido(dados.route.params.post.data.horarioEscolhido);
     setNomeEspecialidade(dados.route.params.post.data.nomeEspecialidade);
     setEspecialidadeId(dados.route.params.post.data.especialidadeId);
@@ -38,14 +38,13 @@ export default function ListaHorarios(dados) {
     }
     const res = await CriarNovaConsulta(params);
     console.log(res);
-    if (res[0].data.success) {
-      setSucesso(true);
+    if (res[0]?.data.success === true) {
       return Alert.alert(res[0].data?.message);
     }
-    if (res[0].response.data.success === false) {
+    if (res[0]?.response.data.success === false) {
       return Alert.alert("Aviso!", res[0].response.data?.message);
     }
-    if (res[0].response.status === 401) {
+    if (res[0]?.response.data === '') {
       return Alert.alert("Login expirado!", 'Refaça login e repita processo');
     }
   }

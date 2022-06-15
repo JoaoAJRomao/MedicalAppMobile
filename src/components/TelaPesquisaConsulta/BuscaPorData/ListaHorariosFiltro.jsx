@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, Text, Image, TouchableOpacity, View, StatusBar } from 'react-native'
-import { BuscarFilaPorMedicoeDataConsulta } from '../../../Services/AgendamentoService'
+import { BuscarFilaPorMedicoeDataConsulta, BuscarTodasEspecialidades } from '../../../Services/AgendamentoService'
 import { CreateWorkingTrack } from '../../../util/WorkingTrackAssistant'
 import moment from 'moment'
 import Background from '../../Background/Background';
 import Header from '../../Header/Header';
 import styles from "../../TelaListaHorarios/TelaListaHorarios.style"
+import { useNavigation } from '@react-navigation/native'
 
 export default function ListaHorariosFiltro(dados) {
+  const navigation = useNavigation()
   const [horariosDisponiveis, setHorariosDisponiveis] = useState([])
   const [nomeMedico, setNomeMedico] = useState('')
+  const [horarioEscolhido, setHorarioEscolhido] = useState('')
+  const [nomeEspecialidade, setNomeEspecialidade] = useState('')
 
   useEffect(async () => {
     const crm = dados.route.params.crm;
@@ -33,6 +37,10 @@ export default function ListaHorariosFiltro(dados) {
       const listaHorarios = await CreateWorkingTrack(rangeDate, 20, consultasMarcadas);
       setHorariosDisponiveis(adicionandoID(listaHorarios));
     }
+
+    const resEspecialidade = await BuscarTodasEspecialidades()
+    let nomeEspecialidadeEscolhida = resEspecialidade[0].filter(item=> item.codigoEspecialidade === dados.route.params.dados.route.params.specialty)
+    setNomeEspecialidade(nomeEspecialidadeEscolhida[0].nomeEspecialidade)
   }, [])
 
   function adicionandoID(lista) {
@@ -79,7 +87,7 @@ export default function ListaHorariosFiltro(dados) {
               <View style={styles.backgroundTime}
               >
                 <TouchableOpacity
-                  onPress={() => console.log(item)}
+                  onPress={() => setHorarioEscolhido(item.item.horario)}
                   style={styles.button}
                 >
                   <Text style={{ fontSize: 24 }}>{item.item.horario}</Text>
@@ -93,7 +101,22 @@ export default function ListaHorariosFiltro(dados) {
           <TouchableOpacity style={styles.footerDeclineButton} >
             <Text style={{ fontSize: 24, }} > Cancelar </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.footerAcceptButton} >
+          <TouchableOpacity style={styles.footerAcceptButton}
+           onPress={()=> {navigation.navigate({
+            name: 'ConfirmacaoAgendamento',
+            params: { post: {
+              data: { 
+                  especialidadeId: dados.route.params.dados.route.params.specialty,
+                  crm: dados.route.params.crm,
+                  dataMarcada: dados.route.params.horarioFiltro.Data,
+                  horarioEscolhido: horarioEscolhido,
+                  nomeMedico: dados.route.params.nomeMedico,
+                  nomeEspecialidade: nomeEspecialidade
+              }
+            }  
+           },
+            merge: true
+          })}}>
             <Text style={{ fontSize: 24, }} > Confirmar </Text>
           </TouchableOpacity>
         </View>
