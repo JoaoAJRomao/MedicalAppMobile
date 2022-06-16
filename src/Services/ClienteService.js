@@ -6,9 +6,9 @@ export async function CriarCliente(params) {
 
   await api.post(`/cliente/createClient`, params)
     .then((res) => {
-      estrutura.push(res.data.data)
+      estrutura.push(res?.data)
     }).catch((err) => {
-      estrutura.push(err.data.data)
+      estrutura.push(err?.response?.data)
     });
 
   return estrutura
