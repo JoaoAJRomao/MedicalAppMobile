@@ -13,7 +13,7 @@ export default function ListaHorarios(dados) {
   const [nomeMedico, setNomeMedico] = useState('')
   const [horarioEscolhido, setHorarioEscolhido] = useState('');
   const [selectedId, setSelectedId] = useState(null);
-  const dataMarcada =dados.route.params.post.marcacao.split("-").reverse().join("/");
+  const dataMarcada = dados.route.params.post.marcacao.split("-").reverse().join("/");
   const data = {
     crm: dados.route.params.post.crm,
     nomeMedico: nomeMedico,
@@ -80,9 +80,11 @@ export default function ListaHorarios(dados) {
             </Text>
           </View>
         </View>
-        <Text style={styles.titleText}>
-          Escolha o horário
-        </Text>
+        <View style={{marginBottom: 20}}>
+          <Text style={styles.titleText}>
+            Escolha o horário
+          </Text>
+        </View>
         <View style={styles.backgroundList}>
           <FlatList
             keyExtractor={(item) => item.id}
@@ -106,26 +108,10 @@ export default function ListaHorarios(dados) {
           />
         </View>
         <View style={styles.footer} >
-          {horarioEscolhido === '' ? <SelecioneHorario /> : <HorarioJaSelecionado data={data} />}
+          {horarioEscolhido === '' ? <></> : <HorarioJaSelecionado data={data} />}
         </View>
       </View>
     </Background >
-  )
-}
-
-const SelecioneHorario = () => {
-  return (
-    <TouchableOpacity
-      style={{
-        backgroundColor: '#38B6FF',
-        borderRadius: 12,
-        width: '100%',
-        height: '70%',
-        justifyContent: 'center',
-      }}
-    >
-      <Text style={{ fontSize: 24, textAlign: 'center', }}>Escolha o horario</Text>
-    </TouchableOpacity>
   )
 }
 

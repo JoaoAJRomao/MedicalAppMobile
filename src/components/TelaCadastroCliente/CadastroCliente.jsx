@@ -47,8 +47,6 @@ export default function CadastroCliente() {
             mask="999.999.999-99"
             value={textCpf}
           />
-
-
           <TextInput
             style={styles.input}
             onChangeText={text => filterInput(text)}
@@ -57,8 +55,6 @@ export default function CadastroCliente() {
             maxLength={50}
             keyboardType="ascii-capable"
           />
-
-
           <TextInput
             style={styles.input}
             onChangeText={setTextSenha}
