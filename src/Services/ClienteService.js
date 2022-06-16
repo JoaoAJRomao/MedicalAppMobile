@@ -39,3 +39,29 @@ export async function RecuperarSenha(params) {
 
   return estrutura
 }
+
+export async function ConfirmarCodigo(params) {
+  const estrutura = []
+
+  await api.post(`/cliente/RecoverPass`, params)
+    .then((res) => {
+      estrutura.push(res?.data)
+    }).catch((err) => {
+      estrutura.push(err?.response)
+    });
+
+  return estrutura
+}
+
+export async function TrocarSenha(params) {
+  const estrutura = []
+
+  await api.put(`/cliente/AlterPass`, params)
+    .then((res) => {
+      estrutura.push(res?.data)
+    }).catch((err) => {
+      estrutura.push(err?.response)
+    });
+
+  return estrutura
+}

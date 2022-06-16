@@ -44,6 +44,7 @@ export default function CadastroCliente() {
         onChangeText={setTextNome}
         placeholder=" Digite seu Nome Completo"
         value={textNome}
+        maxLength={50}
         keyboardType="ascii-capable"
       />
       <TextInput
@@ -67,6 +68,7 @@ export default function CadastroCliente() {
         onChangeText={setTextEmail}
         placeholder=" Digite seu e-mail"
         keyboardType="email-address"
+        maxLength={40}
         value={textEmail}
       />
       <TextInput

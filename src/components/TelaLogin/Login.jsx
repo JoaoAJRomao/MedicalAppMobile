@@ -119,7 +119,7 @@ export default function Login() {
           </View>
         </Modal>
 
-        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+        <TouchableOpacity onPress={() => navigation.navigate('RecuperacaoSenha')}>
           <Text >Esqueci minha senha</Text>
         </TouchableOpacity>
 
