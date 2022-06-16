@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import Calendario from './Calendario/Calendario';
 
 export default function MarcarConsultaMedico(medicoEscolhido) {
-  const todayIs = moment(new Date()).format("YYYY-MM-DD");
+  const todayIs = moment(new Date()).add(1, 'days').format("YYYY-MM-DD");
   const [dadosMedico, setDadosMedico] = useState([]);
   const [selectedDate, setSelectedDate] = useState(todayIs);
   const navigation = useNavigation()
