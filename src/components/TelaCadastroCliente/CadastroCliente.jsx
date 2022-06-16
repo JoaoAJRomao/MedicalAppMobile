@@ -14,6 +14,7 @@ import { Select, NativeBaseProvider } from "native-base";
 import { MaskedTextInput } from "react-native-mask-text";
 import { CriarCliente } from "../../Services/ClienteService";
 import DatePicker from "react-native-datepicker";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CadastroCliente() {
   const [textCpf, setTextCpf] = useState("");
@@ -25,7 +26,7 @@ export default function CadastroCliente() {
   const [textDataNascimento, setTextDataNascimento] = useState("");
   const [selectPlano, setSelectPlano] = useState("");
   const [EmailCorreto, setEmailCorreto] = useState(null);
-
+  const navigation = useNavigation()
   function filterInput(text) {
     const specialCharacters = /[`~0-9!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/g;
     if (specialCharacters.test(text)) {
@@ -67,6 +68,7 @@ export default function CadastroCliente() {
                         "Bem vindo ao Medical App !",
                         resp[0].message
                       );
+                      navigation.navigate('login')
                     } else {
                       Alert.alert("Erro no Cadastro !", resp[0].message);
                     }
