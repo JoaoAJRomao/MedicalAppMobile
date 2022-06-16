@@ -15,6 +15,7 @@ import { MaskedTextInput } from "react-native-mask-text";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './Login.style'
 import modalStyle from './Modal.style'
+import { useEffect } from "react";
 
 export default function Login() {
   const [cpf, onChangeCpf] = React.useState(null);
@@ -35,6 +36,9 @@ export default function Login() {
       await AsyncStorage.setItem("ID", res[0]?.data?.idCliente.toString())
       await AsyncStorage.setItem("NOME_CLIENTE", res[0]?.data?.nome)
       await AsyncStorage.setItem("CONVENIO", res[0]?.data?.convenio)
+      await AsyncStorage.setItem("CPF", res[0]?.data?.cpf)
+      await AsyncStorage.setItem("EMAIL", res[0]?.data?.email)
+      onChangePwd("")
       navigation.navigate('consulta')
     } else {
       Alert.alert(

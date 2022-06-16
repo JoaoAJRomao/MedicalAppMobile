@@ -8,19 +8,20 @@ import {
     FlatList,
     Alert
 } from 'react-native'
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import styles from './TelaConsulta.style'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ConsultaPorId, DeletarConsultaPorId } from '../../Services/AgendamentoService';
 import Header from '../Header/Header'
 import Background from '../Background/Background'
 
-export default function TelaConsulta() {
+export default function TelaConsulta(props) {
     const navigation = useNavigation()
     const [nome, setNome] = useState("")
     const [id, setId] = useState("")
     const [token, setToken] = useState("")
     const [consulta, setConsulta] = useState([])
+    const isFocused = useIsFocused();
 
     useEffect(async () => {
         const cliente = await AsyncStorage.getItem("NOME_CLIENTE")
@@ -30,22 +31,30 @@ export default function TelaConsulta() {
         setId(idCliente)
         setToken(tokenclient)
         await carregarLista(idCliente, tokenclient)
-    }, [])
+    }, [props, isFocused])
 
     function goTo() {
         navigation.navigate('exibirconsulta')
     }
 
     function verificarDataConsulta(data, hora) {
-        var dateAgora = new Date().toLocaleString();
-        const dateConsulta = (data + ' ' + hora + ':00').split('/').reverse().join('-')
-        var dateAgoraConvertida = new Date(dateAgora)
-        const dataconvertida = new Date(dateConsulta)
+        const mes = parseInt(data.substr(3,2))
+        const dia = parseInt(data.substr(0,2))
+        const diaAtual = new Date().getUTCDate()
+        const mesAtual = new Date().getUTCMonth()+1
 
-        if (dateAgoraConvertida >= dataconvertida) {
-            return require("@expo/../../assets/verde.png")
-        } else {
-            return require("@expo/../../assets/vermelho.png")
+        if(mesAtual > mes){
+            return "Consulta já realizada"
+        }else if(dia === diaAtual && mesAtual === mes){
+            return `Consulta Hoje`  
+        }     
+        else{
+            if(diaAtual > dia){
+                return "Consulta já realizada"
+            }
+            else{
+                return "Consulta Marcada"
+            }
         }
     }
 
@@ -97,17 +106,17 @@ export default function TelaConsulta() {
                     renderItem={({ item }) => (
                         <View style={styles.box}>
                             <View style={styles.groupItem}>
-                                <TouchableOpacity onPress={() => clickConsulta(item)}>
+                                <TouchableOpacity onPress={() => clickConsulta(item)} 
+                                disabled={verificarDataConsulta(item.dataConsulta, item.horaConsulta) == "Consulta já realizada" ? true: false}>
                                     <View style={styles.item}>
                                         <Text style={styles.itemText}>{item.dataConsulta}</Text>
                                         <Text style={styles.itemText}>{item.horaConsulta}</Text>
                                     </View>
                                     <View style={styles.itemTextMedic}>
                                         <Text style={styles.itemText}>{item.nomeMedico}</Text>
-                                        <Image style={{ justifyContent: 'space-between', marginLeft: 10 }} source={verificarDataConsulta(item.dataConsulta, item.horaConsulta)} />
                                     </View>
                                     <View style={styles.item}>
-                                        <Text style={styles.itemText}>Consulta</Text>
+                                        <Text style={styles.itemText}>{verificarDataConsulta(item.dataConsulta, item.horaConsulta)}</Text>
                                         <Text style={styles.itemText}>{item.nomeEspecialidade}</Text>
                                     </View>
                                 </TouchableOpacity>

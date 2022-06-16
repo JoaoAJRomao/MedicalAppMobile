@@ -11,16 +11,18 @@ export default function Header(props) {
     const navigation = useNavigation()
 
     function something() {
-        navigation.navigate('exibirconsulta')
+        navigation.navigate('TelaPerfil')
     }
     return (
         <View style={styles.header}>
             <View style={styles.headerOptions}>
+                <TouchableOpacity onPress={something}>
                 <Image
                     source={require('../../../assets/userGeneric.png')}
                     style={{ width: 30, height: 30 }}
                     resizeMode="contain"
                 />
+                </TouchableOpacity>
                 {props?.hasReturn &&
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image
@@ -30,22 +32,6 @@ export default function Header(props) {
                         />
                     </TouchableOpacity>
                 }
-            </View>
-            <View style={styles.headerOptions}>
-                <TouchableOpacity onPress={something}>
-                    <Image
-                        source={require('../../../assets/notificacao.png')}
-                        style={styles.headerIcons}
-                        resizeMode="contain"
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={something}>
-                    <Image
-                        source={require('../../../assets/menuLinhasHorizontais.png')}
-                        style={styles.headerIcons}
-                        resizeMode="contain"
-                    />
-                </TouchableOpacity>
             </View>
         </View>
     );
