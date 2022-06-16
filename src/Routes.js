@@ -12,17 +12,21 @@ import ConfirmacaoAgendamento from './components/TelaConfirmacaoAgendamento/Tela
 import ListaHorariosFiltro from './components/TelaPesquisaConsulta/BuscaPorData/ListaHorariosFiltro';
 import RecuperacaoSenha from './components/TelaRecuperacaoSenha/RecuperacaoSenha';
 import TelaTrocarSenha from './components/TelaRecuperacaoSenha/TelaTrocarSenha';
+import TelaPerfil from './components/TelaPerfil/TelaPerfil';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function Routes() {
   const Stack = createNativeStackNavigator();
+  const token = AsyncStorage.getItem("TOKEN")
+  
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: false
         }}>
-        <Stack.Screen name="login" component={Login} />
+        <Stack.Screen name="login" component={Login}/>
         <Stack.Screen name="consulta" component={Consulta} />
         <Stack.Screen name="exibirconsulta" component={TelaPesquisaConsulta} />
         <Stack.Screen name="cadastro" component={CadastroCliente} />
@@ -33,6 +37,7 @@ export default function Routes() {
         <Stack.Screen name="ListaHorariosFiltro" component={ListaHorariosFiltro} />
         <Stack.Screen name="RecuperacaoSenha" component={RecuperacaoSenha} />
         <Stack.Screen name="TelaTrocarSenha" component={TelaTrocarSenha} />
+        <Stack.Screen name="TelaPerfil" component={TelaPerfil} />
       </Stack.Navigator>
     </NavigationContainer>
   )
