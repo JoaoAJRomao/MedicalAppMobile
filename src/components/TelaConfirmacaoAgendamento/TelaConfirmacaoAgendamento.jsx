@@ -37,13 +37,11 @@ export default function ListaHorarios(dados) {
       ConvenioCliente: await AsyncStorage.getItem("CONVENIO"),
     }
     const res = await CriarNovaConsulta(params);
-    console.log(res);
     if (res[0]?.response?.data === '') {
       return Alert.alert("Login expirado!", 'Refaça login e repita processo');
     } else {
       if (res[0]?.data?.success === true) {
         setSucesso(true);
-        return Alert.alert(res[0].data?.message);
       }
       if (res[0]?.response?.data?.success === false) {
         return Alert.alert("Aviso!", res[0].response.data?.message);
@@ -90,8 +88,8 @@ export default function ListaHorarios(dados) {
           </View>
         </View>
 
-        <View>
-          <Text>A consulta acima foi confirmada e pode ser encontrada na sua tela inicial!</Text>
+        <View style={{ marginHorizontal: 20, marginVertical: 40 }}>
+          {sucesso && <MensagemDeSucesso />}
         </View>
 
         <View style={styles.footer} >
@@ -134,5 +132,11 @@ const TelaConsultaButton = () => {
         resizeMode="contain"
       />
     </TouchableOpacity>
+  )
+}
+
+const MensagemDeSucesso = () => {
+  return (
+    <Text style={styles.text}>A consulta acima foi confirmada e pode ser encontrada na sua tela inicial!</Text>
   )
 }
