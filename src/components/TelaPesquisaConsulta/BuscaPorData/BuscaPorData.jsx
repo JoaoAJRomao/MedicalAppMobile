@@ -5,12 +5,11 @@ import { Calendar, LocaleConfig } from "react-native-calendars";
 import moment from "moment";
 import { CreateWorkingTrack } from "../../../util/WorkingTrackAssistant";
 import ViewHorariosFiltro from "./ViewHorariosFiltro";
-import { ConsultaPorFiltroData } from "../../../Services/AgendamentoService";
 import { useNavigation } from "@react-navigation/native";
 
 export default function BuscaPorData({ specialty }) {
   const navigation = useNavigation()
-  const todayIs = moment(new Date()).format("YYYY-MM-DD");
+  const todayIs = moment(new Date()).add(1, 'days').format("YYYY-MM-DD");
   const [selectedDate, setSelectedDate] = useState(todayIs);
   const [horaSelecionadaInicio, setHoraSelecionadaInicio] =
     useState("Hora Inicial");

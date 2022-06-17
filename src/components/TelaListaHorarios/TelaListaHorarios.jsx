@@ -118,9 +118,11 @@ const HorarioJaSelecionado = (data) => {
   const navigation = useNavigation()
   return (
     <>
-      <TouchableOpacity style={styles.footerDeclineButton}>
+      <TouchableOpacity style={styles.footerDeclineButton} onPress={()=> {navigation.navigate('consulta')}}>
         <Text style={{ fontSize: 24, }}> Cancelar </Text>
-      </TouchableOpacity><TouchableOpacity style={styles.footerAcceptButton}
+      </TouchableOpacity>
+      
+      <TouchableOpacity style={styles.footerAcceptButton}
         onPress={() => navigation.navigate({
           name: 'ConfirmacaoAgendamento',
           params: { post: data },

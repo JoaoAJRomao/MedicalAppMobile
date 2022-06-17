@@ -101,9 +101,10 @@ export default function ListaHorarios(dados) {
 }
 
 const RealizarRequisicaoOuCancelar = ({ confirmaAgendamento }) => {
+  const navigation = useNavigation()
   return (
     <>
-      <TouchableOpacity style={styles.footerDeclineButton} >
+      <TouchableOpacity style={styles.footerDeclineButton} onPress={()=> {navigation.navigate('consulta')}}>
         <Text style={styles.text} > Cancelar </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.footerAcceptButton}

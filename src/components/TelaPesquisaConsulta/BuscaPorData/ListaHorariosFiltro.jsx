@@ -14,6 +14,7 @@ export default function ListaHorariosFiltro(dados) {
   const [nomeMedico, setNomeMedico] = useState('')
   const [horarioEscolhido, setHorarioEscolhido] = useState('')
   const [nomeEspecialidade, setNomeEspecialidade] = useState('')
+  const [selectedId, setSelectedId] = useState("");
 
   useEffect(async () => {
     const crm = dados.route.params.crm;
@@ -82,12 +83,15 @@ export default function ListaHorariosFiltro(dados) {
           <FlatList
             keyExtractor={(item) => item.id}
             data={horariosDisponiveis}
+            extraData={selectedId}
             showsVerticalScrollIndicator ={false}
             renderItem={(item) =>
-              <View style={styles.backgroundTime}
+              <View style={[item.item.id === selectedId ? styles.backgroundTimeSelected : styles.backgroundTime]}
               >
                 <TouchableOpacity
-                  onPress={() => setHorarioEscolhido(item.item.horario)}
+                  onPress={() => {
+                    setHorarioEscolhido(item.item.horario)
+                    setSelectedId(item.item.id)}}
                   style={styles.button}
                 >
                   <Text style={{ fontSize: 24 }}>{item.item.horario}</Text>
@@ -98,7 +102,7 @@ export default function ListaHorariosFiltro(dados) {
         </View>
 
         <View style={styles.footer} >
-          <TouchableOpacity style={styles.footerDeclineButton} >
+          <TouchableOpacity style={styles.footerDeclineButton} onPress={()=> {navigation.navigate('consulta')}}>
             <Text style={{ fontSize: 24, }} > Cancelar </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.footerAcceptButton}

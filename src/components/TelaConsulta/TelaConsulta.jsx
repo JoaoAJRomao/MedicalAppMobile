@@ -58,6 +58,27 @@ export default function TelaConsulta(props) {
         }
     }
 
+    function cores(data, hora){
+        const mes = parseInt(data.substr(3,2))
+        const dia = parseInt(data.substr(0,2))
+        const diaAtual = new Date().getUTCDate()
+        const mesAtual = new Date().getUTCMonth()+1
+
+        if(mesAtual > mes){
+            return '#fecac6'
+        }else if(dia === diaAtual && mesAtual === mes){
+            return `#c8ffc0`  
+        }     
+        else{
+            if(diaAtual > dia){
+                return '#fecac6'
+            }
+            else{
+                return '#fffec0'
+            }
+        }
+    }
+
     async function carregarLista(idCliente, tokenclient) {
         const params = {
             idClient: idCliente,
@@ -104,7 +125,16 @@ export default function TelaConsulta(props) {
                     keyExtractor={(item) => item.codigoConsulta}
                     data={consulta}
                     renderItem={({ item }) => (
-                        <View style={styles.box}>
+                        <View style={{
+                            height: 110,
+                            backgroundColor: cores(item.dataConsulta, item.horaConsulta),
+                            margin: 7,
+                            borderRadius: 10,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'flex-start'
+                        }}>
+                            
                             <View style={styles.groupItem}>
                                 <TouchableOpacity onPress={() => clickConsulta(item)} 
                                 disabled={verificarDataConsulta(item.dataConsulta, item.horaConsulta) == "Consulta já realizada" ? true: false}>
@@ -131,8 +161,8 @@ export default function TelaConsulta(props) {
                 </TouchableOpacity>
             </View>
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.footerButton}>
-                    <Text> Perguntas </Text>
+                <TouchableOpacity style={styles.footerButton} onPress={goTo}>
+                    <Text style={{fontSize: 18}}> Criar Nova Consulta </Text>
                 </TouchableOpacity>
             </View>
         </Background>
