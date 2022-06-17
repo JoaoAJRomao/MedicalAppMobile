@@ -89,7 +89,6 @@ export default function TelaConsulta(props) {
     }
 
     const clickConsulta = (dados) => {
-        console.log(dados)
         Alert.alert(
             'Cancelamento de Consulta',
             'Deseja cancelar a consulta ?',
@@ -160,6 +159,7 @@ export default function TelaConsulta(props) {
                     />
                 </TouchableOpacity>
             </View>
+                <Text style={{textAlign: 'center'}}>*Clique em uma consulta ativa(amarelo ou verde) para cancelá-la.</Text>
             <View style={styles.footer}>
                 <TouchableOpacity style={styles.footerButton} onPress={goTo}>
                     <Text style={{fontSize: 18}}> Criar Nova Consulta </Text>

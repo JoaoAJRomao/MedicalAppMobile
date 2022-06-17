@@ -79,10 +79,8 @@ export async function CriarNovaConsulta(params) {
   })
     .then((res) => {
       estrutura.push(res)
-      console.log(res)
     }).catch((err) => {
       estrutura.push(err)
-      console.log(err)
     });
 
   return estrutura
