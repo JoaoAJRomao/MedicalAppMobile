@@ -80,7 +80,7 @@ export default function ListaHorarios(dados) {
             </Text>
           </View>
         </View>
-        <View style={{marginBottom: 20}}>
+        <View style={{ marginBottom: 20 }}>
           <Text style={styles.titleText}>
             Escolha o horário
           </Text>
@@ -92,8 +92,7 @@ export default function ListaHorarios(dados) {
             extraData={selectedId}
             showsVerticalScrollIndicator={false}
             renderItem={(item) =>
-              <View style={[item.item.id === selectedId ? styles.backgroundTimeSelected : styles.backgroundTime]}
-              >
+              <View style={[item.item.id === selectedId ? styles.backgroundTimeSelected : styles.backgroundTime]}>
                 <TouchableOpacity
                   style={styles.button}
                   onPress={() => {

@@ -131,7 +131,7 @@ export default function TelaConsulta(props) {
                 </TouchableOpacity>
             </View>
             <View style={styles.footer}>
-                <TouchableOpacity onPress={goTo} style={styles.footerButton}>
+                <TouchableOpacity style={styles.footerButton}>
                     <Text> Perguntas </Text>
                 </TouchableOpacity>
             </View>
