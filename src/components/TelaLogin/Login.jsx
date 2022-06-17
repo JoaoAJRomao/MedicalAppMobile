@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { LogarCliente, RecuperarSenha } from "../../Services/ClienteService"
 import {
@@ -17,13 +17,20 @@ import styles from './Login.style'
 import modalStyle from './Modal.style'
 import { useEffect } from "react";
 
-export default function Login() {
+export default function Login(props) {
   const [cpf, onChangeCpf] = React.useState(null);
   const [pwd, onChangePwd] = React.useState(null);
   const [email, onChangeEmail] = React.useState("");
   const [modalVisible, setModalVisible] = React.useState(false);
-
+  const isFocused = useIsFocused();
   const navigation = useNavigation()
+
+  useEffect( async () => {
+   const token = await AsyncStorage.getItem("TOKEN");
+    if(token !== null){
+      navigation.navigate('consulta')
+    }
+}, [props, isFocused])
 
   async function sendData() {
     const data = {
