@@ -21,7 +21,7 @@ export default function RecuperacaoSenha() {
       if (respostaRecuperacao[0].success) {
           setModalVisible(true)
         } else {
-            Alert.alert(respostaRecuperacao[0].data.message);
+            Alert.alert("Aviso!",respostaRecuperacao[0].data.message);
         }
   }
 

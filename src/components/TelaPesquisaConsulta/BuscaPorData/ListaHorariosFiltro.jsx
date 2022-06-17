@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, Text, Image, TouchableOpacity, View, StatusBar } from 'react-native'
+import { FlatList, Text, Image, TouchableOpacity, View, StatusBar, Alert } from 'react-native'
 import { BuscarFilaPorMedicoeDataConsulta, BuscarTodasEspecialidades } from '../../../Services/AgendamentoService'
 import { CreateWorkingTrack } from '../../../util/WorkingTrackAssistant'
 import moment from 'moment'
@@ -106,7 +106,9 @@ export default function ListaHorariosFiltro(dados) {
             <Text style={{ fontSize: 24, }} > Cancelar </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.footerAcceptButton}
-           onPress={()=> {navigation.navigate({
+           onPress={()=> {
+            if (horarioEscolhido !== ""){
+            navigation.navigate({
             name: 'ConfirmacaoAgendamento',
             params: { post: {
               data: { 
@@ -120,7 +122,11 @@ export default function ListaHorariosFiltro(dados) {
             }  
            },
             merge: true
-          })}}>
+          })}else{
+            Alert.alert("Aviso!", "Por favor, selecione um horário")
+          }
+          
+          }}>
             <Text style={{ fontSize: 24, }} > Confirmar </Text>
           </TouchableOpacity>
         </View>

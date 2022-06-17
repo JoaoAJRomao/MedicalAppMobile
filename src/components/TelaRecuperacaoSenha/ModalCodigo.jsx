@@ -22,7 +22,7 @@ const ModalCodigo = ({modalVisible, setModalVisible, emailPaciente}) => {
         merge: true
       })
    }else{
-    Alert.alert(respostaCodigo[0]?.data?.message);
+    Alert.alert("Aviso!",respostaCodigo[0]?.data?.message);
    }
 
 

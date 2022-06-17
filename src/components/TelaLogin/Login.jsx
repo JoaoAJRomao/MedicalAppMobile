@@ -48,7 +48,7 @@ export default function Login(props) {
       onChangePwd("")
       navigation.navigate('consulta')
     } else {
-      Alert.alert(
+      Alert.alert("Aviso!",
         res[0].data?.message
       )
     }
@@ -57,8 +57,8 @@ export default function Login(props) {
   async function recoveryPassword() {
     const res = await RecuperarSenha(email)
     if (res[0].data.success) {
-      Alert.alert(res[0].data?.message)
-    } else { Alert.alert(res[0].data?.message) }
+      Alert.alert("Aviso!",res[0].data?.message)
+    } else { Alert.alert("Aviso!",res[0].data?.message) }
     setModalVisible(!modalVisible)
   }
 

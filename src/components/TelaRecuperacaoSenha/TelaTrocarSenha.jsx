@@ -28,14 +28,14 @@ export default function TelaTrocarSenha(dados) {
     const respTroca = await TrocarSenha(parametros)
 
     if(respTroca[0]?.success === true) {
-      Alert.alert(respTroca[0]?.message);
+      Alert.alert("Aviso!",respTroca[0]?.message);
       navigation.navigate('login')
     }else{
-      Alert.alert(respTroca[0]?.data?.message);
+      Alert.alert("Aviso!",respTroca[0]?.data?.message);
     }
 
   }else{
-    Alert.alert("Senha precisa estar preenchida.");
+    Alert.alert("Aviso!","Senha precisa estar preenchida.");
   }
   }
 
